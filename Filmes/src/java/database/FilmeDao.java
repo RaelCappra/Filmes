@@ -48,7 +48,7 @@ public class FilmeDao implements Dao<Filme, Long> {
             ps.setString(5, entity.getElenco());
             ps.setString(6, entity.getSinopse());
             ps.setString(7, entity.getLinkTrailer());
-            ps.setInt(8, entity.getDuracaoMinutos());//TODO:Check this
+            ps.setInt(8, entity.getDuracaoMinutos());
             ps.execute();
         } catch (SQLException ex) {
             //TODO: tratar
@@ -93,7 +93,6 @@ public class FilmeDao implements Dao<Filme, Long> {
                 filme.setSinopse(rs.getString("sinopse"));
                 filme.setLinkTrailer(rs.getString("link_trailer"));
                 filme.setDuracaoMinutos(rs.getInt("duracao_min"));
-                //TODO:concluir FilmeDao.listAll()
                 result.add(filme);
             }
         } catch (SQLException ex) {

@@ -82,11 +82,11 @@ public class GeneroDao implements Dao<Genero,Long> {
         Connection connection = conexao.getConnection();
         Genero result = new Genero();
         try(PreparedStatement ps = connection.prepareStatement(query)){
+            ps.setLong(1, pk);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                Genero admin = new Genero();
-                admin.setId(rs.getLong("id"));
-                admin.setNome(rs.getString("nome"));
+                result.setId(rs.getLong("id"));
+                result.setNome(rs.getString("descricao"));
             }
         } catch (SQLException ex) {
             //TODO: tratar

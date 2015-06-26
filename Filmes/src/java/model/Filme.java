@@ -80,6 +80,11 @@ public class Filme {
         this.genero = genero;
     }
 
+    @Override
+    public String toString() {
+        return "Filme{" + "id=" + id + ", titulo=" + titulo + ", direcao=" + direcao + ", elenco=" + elenco + ", sinopse=" + sinopse + ", linkTrailer=" + linkTrailer + ", duracaoMinutos=" + duracaoMinutos + ", genero=" + genero.getNome() + ", classificacao=" + classificacao.getDescricao() + '}';
+    }
+
     public Classificacao getClassificacao() {
         return classificacao;
     }

@@ -82,11 +82,11 @@ public class ClassificacaoDao implements Dao<Classificacao,Long> {
         Connection connection = conexao.getConnection();
         Classificacao result = new Classificacao();
         try(PreparedStatement ps = connection.prepareStatement(query)){
+            ps.setLong(1, pk);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                Classificacao admin = new Classificacao();
-                admin.setId(rs.getLong("id"));
-                admin.setDescricao(rs.getString("descricao"));
+                result.setId(rs.getLong("id"));
+                result.setDescricao(rs.getString("descricao"));
             }
         } catch (SQLException ex) {
             //TODO: tratar

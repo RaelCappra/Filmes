@@ -83,6 +83,7 @@ public class AdminDao implements Dao<Admin, String>{
         Connection connection = conexao.getConnection();
         Admin result = new Admin();
         try(PreparedStatement ps = connection.prepareStatement(query)){
+            ps.setString(1, pk);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 Admin admin = new Admin();
