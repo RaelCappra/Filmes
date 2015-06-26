@@ -18,8 +18,12 @@ public class Test {
     public static void main(String... args){
         Filme filme = new Filme();
         filme.setTitulo("test");
-        filme.setClassificacao(new Classificacao(1, null));
-        filme.setGenero(new Genero(1, null));
+        filme.setDirecao("asd");
+        filme.setElenco("asd");
+        filme.setLinkTrailer("asd");
+        filme.setSinopse("asd");
+        filme.setClassificacao(new Classificacao(1, "q"));
+        filme.setGenero(new Genero(1, "w"));
         filme.setDuracaoMinutos(61);
         FilmeDao filmeDao = new FilmeDao();
         filmeDao.save(filme);

@@ -38,16 +38,17 @@ public class FilmeDao implements Dao<Filme, Long> {
     public void save(Filme entity) {
         String query = "insert into filme (titulo, genero, classificacao,"
                 + " direcao, elenco, sinopse, link_trailer, duracao) "
-                + "values (?,?,?,?,?,?,?,?)";
+                + "values (?,?,?,?,?,?,?,interval ?)";
         Connection connection = conexao.getConnection();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, entity.getTitulo());
             ps.setLong(2, entity.getGenero().getId());
             ps.setLong(3, entity.getClassificacao().getId());
             ps.setString(4, entity.getDirecao());
-            ps.setString(5, entity.getSinopse());
-            ps.setString(6, entity.getLinkTrailer());
-            ps.setString(7, entity.getDuracaoMinutos() + " minutes"); //TODO:Check this
+            ps.setString(5, entity.getElenco());
+            ps.setString(6, entity.getSinopse());
+            ps.setString(7, entity.getLinkTrailer());
+            ps.setString(8, String.valueOf(entity.getDuracaoMinutos())); //TODO:Check this
             ps.executeQuery();
         } catch (SQLException ex) {
             //TODO: tratar
