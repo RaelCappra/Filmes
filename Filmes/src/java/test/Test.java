@@ -27,6 +27,6 @@ public class Test {
         filme.setDuracaoMinutos(61);*/
         FilmeDao filmeDao = new FilmeDao();
         //filmeDao.save(filme);*/
-        System.out.println(filmeDao.listAll());
+        System.out.println(filmeDao.getById(1L));
     }
 }

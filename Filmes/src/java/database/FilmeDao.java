@@ -79,10 +79,10 @@ public class FilmeDao implements Dao<Filme, Long> {
             while (rs.next()) {
                 GeneroDao generoDao = new GeneroDao();
                 ClassificacaoDao classificacaoDao = new ClassificacaoDao();
-                
+
                 Genero genero = generoDao.getById(rs.getLong("genero"));
                 Classificacao classificacao = classificacaoDao.getById(rs.getLong("classificacao"));
-                
+
                 Filme filme = new Filme();
                 filme.setId(rs.getLong("id"));
                 filme.setTitulo(rs.getString("titulo"));
@@ -104,7 +104,34 @@ public class FilmeDao implements Dao<Filme, Long> {
 
     @Override
     public Filme getById(Long pk) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "select * from filme where id = ?";
+        Filme result = new Filme();
+        Connection connection = conexao.getConnection();
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setLong(1, pk);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                GeneroDao generoDao = new GeneroDao();
+                ClassificacaoDao classificacaoDao = new ClassificacaoDao();
+
+                Genero genero = generoDao.getById(rs.getLong("genero"));
+                Classificacao classificacao = classificacaoDao.getById(rs.getLong("classificacao"));
+
+                result.setId(rs.getLong("id"));
+                result.setTitulo(rs.getString("titulo"));
+                result.setGenero(genero);
+                result.setClassificacao(classificacao);
+                result.setDirecao(rs.getString("direcao"));
+                result.setElenco(rs.getString("elenco"));
+                result.setSinopse(rs.getString("sinopse"));
+                result.setLinkTrailer(rs.getString("link_trailer"));
+                result.setDuracaoMinutos(rs.getInt("duracao_min"));
+            }
+        } catch (SQLException ex) {
+            //TODO: tratar
+            Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 
 }
