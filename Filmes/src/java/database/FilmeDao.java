@@ -53,7 +53,15 @@ public class FilmeDao implements Dao<Filme, Long> {
 
     @Override
     public void delete(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "delete from filme where id = ?";
+        Connection connection = conexao.getConnection();
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setLong(1, id);
+            ps.executeQuery();
+        } catch (SQLException ex) {
+            //TODO: tratar
+            Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
