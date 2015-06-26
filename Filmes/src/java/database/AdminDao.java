@@ -68,6 +68,7 @@ public class AdminDao implements Dao<Admin, String>{
                 Admin admin = new Admin();
                 admin.setLogin(rs.getString("login"));
                 admin.setMd5senha(rs.getString("md5_senha"));
+                result.add(admin);
             }
         } catch (SQLException ex) {
             //TODO: tratar
@@ -78,7 +79,21 @@ public class AdminDao implements Dao<Admin, String>{
 
     @Override
     public Admin getById(String pk) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "select * from admin where login = ?";
+        Connection connection = conexao.getConnection();
+        Admin result = new Admin();
+        try(PreparedStatement ps = connection.prepareStatement(query)){
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                Admin admin = new Admin();
+                admin.setLogin(rs.getString("login"));
+                admin.setMd5senha(rs.getString("md5_senha"));
+            }
+        } catch (SQLException ex) {
+            //TODO: tratar
+            Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
     
     
