@@ -1,4 +1,4 @@
---
+﻿--
 -- PostgreSQL database dump
 --
 
@@ -18,12 +18,12 @@ SET client_min_messages = warning;
 -- Name: cinema; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE cinema WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'Portuguese_Brazil.1252' LC_CTYPE = 'Portuguese_Brazil.1252';
+--CREATE DATABASE cinema WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'Portuguese_Brazil.1252' LC_CTYPE = 'Portuguese_Brazil.1252';
 
 
 ALTER DATABASE cinema OWNER TO postgres;
 
-\connect cinema
+--\connect cinema
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;

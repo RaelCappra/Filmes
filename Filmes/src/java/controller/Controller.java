@@ -15,7 +15,7 @@ public abstract class Controller {
         this.hasPageJsp = true;
     }
 
-    public boolean isHasPageJsp() {
+    public boolean hasPageJsp() {
         return hasPageJsp;
     }
 
