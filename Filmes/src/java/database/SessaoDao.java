@@ -23,6 +23,7 @@ import model.Sessao;
  *
  * @author aluno
  */
+//TODO: Corrigir problema do money
 public class SessaoDao implements Dao<Sessao, Long> {
 
     private ConexaoPostgreSQL conexao;

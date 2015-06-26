@@ -26,6 +26,11 @@ public class Sessao {
         this.sala = sala;
     }
 
+    @Override
+    public String toString() {
+        return "Sessao{" + "id=" + id + ", filme=" + filme + ", horario=" + horario + ", valorAdulto=" + valorAdulto + ", valorEstudante=" + valorEstudante + ", valorIdoso=" + valorIdoso + ", is3d=" + is3d + ", isLegendado=" + isLegendado + ", sala=" + sala + '}';
+    }
+
     public long getId() {
         return id;
     }
