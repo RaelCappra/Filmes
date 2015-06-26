@@ -7,11 +7,15 @@ package database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Classificacao;
 import model.Filme;
+import model.Genero;
 
 /**
  *
@@ -66,7 +70,36 @@ public class FilmeDao implements Dao<Filme, Long> {
 
     @Override
     public List<Filme> listAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "select * from filme";
+        List<Filme> result = new ArrayList<>();
+        Connection connection = conexao.getConnection();
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                GeneroDao generoDao = new GeneroDao();
+                ClassificacaoDao classificacaoDao = new ClassificacaoDao();
+                
+                Genero genero = generoDao.getById(rs.getLong("genero"));
+                Classificacao classificacao = classificacaoDao.getById(rs.getLong("classificacao"));
+                
+                Filme filme = new Filme();
+                filme.setId(rs.getLong("id"));
+                filme.setTitulo(rs.getString("titulo"));
+                filme.setGenero(genero);
+                filme.setClassificacao(classificacao);
+                filme.setDirecao(rs.getString("direcao"));
+                filme.setElenco(rs.getString("elenco"));
+                filme.setSinopse(rs.getString("sinopse"));
+                filme.setLinkTrailer(rs.getString("link_trailer"));
+                //rs.get
+                //TODO:concluir FilmeDao.listAll()
+                result.add(filme);
+            }
+        } catch (SQLException ex) {
+            //TODO: tratar
+            Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 
     @Override
