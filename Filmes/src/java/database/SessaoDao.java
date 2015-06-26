@@ -38,10 +38,10 @@ public class SessaoDao implements Dao<Sessao, Long> {
         Connection connection = conexao.getConnection();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setLong(1, entity.getFilme().getId());
-            
+
             java.sql.Timestamp ts = new java.sql.Timestamp(entity.getHorario()
                     .getTimeInMillis());
-            
+
             ps.setTimestamp(2, ts);
             ps.setDouble(3, entity.getValorAdulto());
             ps.setDouble(4, entity.getValorEstudante());
@@ -58,7 +58,15 @@ public class SessaoDao implements Dao<Sessao, Long> {
 
     @Override
     public void delete(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "delete from sessao where id = ?";
+        Connection connection = conexao.getConnection();
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setLong(1, id);
+            ps.execute();
+        } catch (SQLException ex) {
+            //TODO: tratar
+            Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
