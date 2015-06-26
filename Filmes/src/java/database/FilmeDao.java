@@ -37,8 +37,8 @@ public class FilmeDao implements Dao<Filme, Long> {
     @Override
     public void save(Filme entity) {
         String query = "insert into filme (titulo, genero, classificacao,"
-                + " direcao, elenco, sinopse, link_trailer, duracao) "
-                + "values (?,?,?,?,?,?,?,interval ?)";
+                + " direcao, elenco, sinopse, link_trailer, duracao_min) "
+                + "values (?,?,?,?,?,?,?,?)";
         Connection connection = conexao.getConnection();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, entity.getTitulo());
@@ -48,8 +48,8 @@ public class FilmeDao implements Dao<Filme, Long> {
             ps.setString(5, entity.getElenco());
             ps.setString(6, entity.getSinopse());
             ps.setString(7, entity.getLinkTrailer());
-            ps.setString(8, String.valueOf(entity.getDuracaoMinutos())); //TODO:Check this
-            ps.executeQuery();
+            ps.setInt(8, entity.getDuracaoMinutos());//TODO:Check this
+            ps.execute();
         } catch (SQLException ex) {
             //TODO: tratar
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,7 +62,7 @@ public class FilmeDao implements Dao<Filme, Long> {
         Connection connection = conexao.getConnection();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setLong(1, id);
-            ps.executeQuery();
+            ps.execute();
         } catch (SQLException ex) {
             //TODO: tratar
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,7 +92,7 @@ public class FilmeDao implements Dao<Filme, Long> {
                 filme.setElenco(rs.getString("elenco"));
                 filme.setSinopse(rs.getString("sinopse"));
                 filme.setLinkTrailer(rs.getString("link_trailer"));
-                //rs.get
+                filme.setDuracaoMinutos(rs.getInt("duracao_min"));
                 //TODO:concluir FilmeDao.listAll()
                 result.add(filme);
             }

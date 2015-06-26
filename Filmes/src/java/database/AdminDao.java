@@ -37,7 +37,7 @@ public class AdminDao implements Dao<Admin, String>{
         try(PreparedStatement ps = connection.prepareStatement(query)){
             ps.setString(1, entity.getLogin());
             ps.setString(2, entity.getMd5senha());
-            ps.executeQuery();
+            ps.execute();
         } catch (SQLException ex) {
             //TODO: tratar
             Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -50,7 +50,7 @@ public class AdminDao implements Dao<Admin, String>{
         Connection connection = conexao.getConnection();
         try(PreparedStatement ps = connection.prepareStatement(query)){
             ps.setString(1, pk);
-            ps.executeQuery();
+            ps.execute();
         } catch (SQLException ex) {
             //TODO: tratar
             Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);

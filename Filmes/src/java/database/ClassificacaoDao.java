@@ -36,7 +36,7 @@ public class ClassificacaoDao implements Dao<Classificacao,Long> {
         Connection connection = conexao.getConnection();
         try(PreparedStatement ps = connection.prepareStatement(query)){
             ps.setString(1, entity.getDescricao());
-            ps.executeQuery();
+            ps.execute();
         } catch (SQLException ex) {
             //TODO: tratar
             Logger.getLogger(ClassificacaoDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -49,7 +49,7 @@ public class ClassificacaoDao implements Dao<Classificacao,Long> {
         Connection connection = conexao.getConnection();
         try(PreparedStatement ps = connection.prepareStatement(query)){
             ps.setLong(1, pk);
-            ps.executeQuery();
+            ps.execute();
         } catch (SQLException ex) {
             //TODO: tratar
             Logger.getLogger(ClassificacaoDao.class.getName()).log(Level.SEVERE, null, ex);
