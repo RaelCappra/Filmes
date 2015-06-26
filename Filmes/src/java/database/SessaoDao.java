@@ -112,7 +112,35 @@ public class SessaoDao implements Dao<Sessao, Long> {
 
     @Override
     public Sessao getById(Long pk) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "select * from sessao where id = ?";
+        Sessao sessao = new Sessao();
+        Connection connection = conexao.getConnection();
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setLong(1, pk);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                FilmeDao filmeDao = new FilmeDao();
+                Filme filme = filmeDao.getById(rs.getLong("filme"));
+                
+                sessao.setId(rs.getLong("id"));
+                sessao.setFilme(filme);
+                sessao.setValorAdulto(rs.getDouble("valor_adulto"));
+                sessao.setValorEstudante(rs.getDouble("valor_estudante"));
+                sessao.setValorEstudante(rs.getDouble("valor_idoso"));
+                sessao.setSala(rs.getInt("sala"));
+                sessao.setIsLegendado(rs.getBoolean("is_legendado"));
+                sessao.setIs3d(rs.getBoolean("is3d"));
+                
+                Calendar horario = Calendar.getInstance();
+                java.sql.Timestamp ts = rs.getTimestamp("horario");
+                horario.setTimeInMillis(ts.getTime());
+                sessao.setHorario(horario);
+            }
+        } catch (SQLException ex) {
+            //TODO: tratar
+            Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sessao;
     }
 
 }
