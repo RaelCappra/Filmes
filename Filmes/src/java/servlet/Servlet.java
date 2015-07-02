@@ -51,8 +51,8 @@ public class Servlet extends HttpServlet {
                 objectController = (Controller) classController.newInstance();
                 // setando os atributos (request e response)
                 objectController.setRequest(request);
-                objectController.setResponse(response);          
-                
+                objectController.setResponse(response);
+
                 try {
                     // recuperando o metodo que esta vindo pela URL
                     Method method = classController.getMethod(request.getParameter("method"));
@@ -61,15 +61,17 @@ public class Servlet extends HttpServlet {
                     // invocando o metodo
                     method.invoke(objectController);
                     // invocando o metodo before
-                    objectController.after();           
+                    objectController.after();
                     // redirecionando para a pagina com o mesmo nome do método do controller
                     try {
-                        if (objectController.hasPageJsp()){
-                            RequestDispatcher rd = request.getRequestDispatcher(Controller.URL_VIEW + request.getParameter("controller") + "/" + request.getParameter("method") + ".jsp");
+                        if (objectController.hasPageJsp()) {
+                            String url = Controller.URL_VIEW + request.getParameter("controller") + "/" + request.getParameter("method") + ".jsp";
+                            RequestDispatcher rd = request.getRequestDispatcher(url);
                             rd.forward(request, response);
                         }
                     } catch (ServletException | IOException e) {
-                       throw new ServletException("Não há a página " + request.getParameter("method") + " dentro do diretório  " + request.getParameter("controller"));
+                        System.out.println(e.getMessage());
+                        throw new ServletException("Não há a página " + request.getParameter("method") + " dentro do diretório  " + request.getParameter("controller"));
                     }
                 } catch (NoSuchMethodException e) {
                     throw new ServletException("Não há o método " + request.getParameter("method") + " solicitado no controller " + request.getParameter("controller"));

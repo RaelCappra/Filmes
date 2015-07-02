@@ -6,6 +6,7 @@
 package model;
 
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -110,5 +111,14 @@ public class Sessao {
 
     public void setSala(int sala) {
         this.sala = sala;
+    }
+    
+    public Date getDuracaoEmDate(){
+        Date result = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, filme.getDuracaoMinutos() / 60);
+        calendar.set(Calendar.MINUTE, filme.getDuracaoMinutos() % 60);
+        result.setTime(calendar.getTimeInMillis());
+        return result;
     }
 }

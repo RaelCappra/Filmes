@@ -20,24 +20,24 @@ import model.Sessao;
 public class Test {
     public static void main(String... args){
         Filme filme = new Filme();
-        filme.setTitulo("test");
-        filme.setDirecao("asd");
-        filme.setElenco("asd");
-        filme.setLinkTrailer("asd");
-        filme.setSinopse("asd");
-        filme.setClassificacao(new Classificacao(1, "q"));
-        filme.setGenero(new Genero(1, "w"));
+        filme.setTitulo("hao123");
+        filme.setDirecao("biaud");
+        filme.setElenco("biaud");
+        filme.setLinkTrailer("biaud");
+        filme.setSinopse("biaud");
+        filme.setClassificacao(new Classificacao(1, "e"));
+        filme.setGenero(new Genero(1, "r"));
         filme.setDuracaoMinutos(61);
         FilmeDao filmeDao = new FilmeDao();
-        filmeDao.save(filme);
+        filme.setId(filmeDao.saveReturningId(filme));
         
         Sessao sessao = new Sessao();
         sessao.setFilme(filme);
         sessao.setHorario(Calendar.getInstance());
         sessao.setIs3d(false);
         sessao.setIsLegendado(true);
-        sessao.setSala(10);
-        sessao.setValorAdulto(15);
+        sessao.setSala(8);
+        sessao.setValorAdulto(1500);
         
         SessaoDao sessaoDao = new SessaoDao();
         sessaoDao.save(sessao);

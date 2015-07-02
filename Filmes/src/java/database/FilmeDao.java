@@ -133,5 +133,30 @@ public class FilmeDao implements Dao<Filme, Long> {
         }
         return result;
     }
-
+    
+    public Long saveReturningId(Filme filme){
+        String query = "insert into filme (titulo, genero, classificacao,"
+                + " direcao, elenco, sinopse, link_trailer, duracao_min) "
+                + "values (?,?,?,?,?,?,?,?) returning id";
+        Connection connection = conexao.getConnection();
+        Long result = -1L;
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, filme.getTitulo());
+            ps.setLong(2, filme.getGenero().getId());
+            ps.setLong(3, filme.getClassificacao().getId());
+            ps.setString(4, filme.getDirecao());
+            ps.setString(5, filme.getElenco());
+            ps.setString(6, filme.getSinopse());
+            ps.setString(7, filme.getLinkTrailer());
+            ps.setInt(8, filme.getDuracaoMinutos());
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            result = rs.getLong(1);
+            
+        } catch (SQLException ex) {
+            //TODO: tratar
+            Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 }
