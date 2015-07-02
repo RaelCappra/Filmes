@@ -19,4 +19,10 @@ public class FilmeController extends Controller{
         List<Filme> filmes = filmeDao.listAll();
         
     }
+    
+    public void descricao(){
+        long id = Long.parseLong(request.getParameter("id"));
+        Filme filme = filmeDao.getById(id);
+        request.setAttribute("filme", filme);
+    }
 }
