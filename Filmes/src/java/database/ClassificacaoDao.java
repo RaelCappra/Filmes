@@ -22,7 +22,7 @@ import model.Classificacao;
 public class ClassificacaoDao implements Dao<Classificacao,Long> {
     private ConexaoPostgreSQL conexao;
     public ClassificacaoDao(){
-        try {
+        /*try {
             if(conexaoDefault.getConnection() == null || conexaoDefault.getConnection().isClosed()){
                 this.conexao = new ConexaoPostgreSQL("localhost", "postgres", "postgres", "cinema");
             } else{
@@ -30,7 +30,9 @@ public class ClassificacaoDao implements Dao<Classificacao,Long> {
             }
         } catch (SQLException ex) {
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
+        this.conexao = conexaoDefault;
+        this.conexao.setDefault();
     }
 
     @Override
@@ -44,6 +46,7 @@ public class ClassificacaoDao implements Dao<Classificacao,Long> {
             //TODO: tratar
             Logger.getLogger(ClassificacaoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        conexao.fechar();
     }
 
     @Override
@@ -57,6 +60,7 @@ public class ClassificacaoDao implements Dao<Classificacao,Long> {
             //TODO: tratar
             Logger.getLogger(ClassificacaoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        conexao.fechar();
     }
 
     @Override
@@ -76,6 +80,7 @@ public class ClassificacaoDao implements Dao<Classificacao,Long> {
             //TODO: tratar
             Logger.getLogger(ClassificacaoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        conexao.fechar();
         return result;
     }
 
@@ -95,6 +100,7 @@ public class ClassificacaoDao implements Dao<Classificacao,Long> {
             //TODO: tratar
             Logger.getLogger(ClassificacaoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        conexao.fechar();
         return result;
     }
 }

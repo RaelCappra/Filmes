@@ -1,6 +1,8 @@
 package database;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConexaoPostgreSQL extends Conexao {
     public static final String HOST = "localhost";
@@ -45,5 +47,21 @@ public class ConexaoPostgreSQL extends Conexao {
                 System.err.println("Houve um erro ao tentar fechar a conexao com o banco.");
             }
         }
+    }
+    
+    @Override
+    public Connection getConnection(){
+        try {
+            if (con == null || con.isClosed()){
+                if ((host != null) && (host.length() > 0)) {
+                    con = DriverManager.getConnection("jdbc:postgresql://" + host + ":" + PORT + "/" + dbname, this.user, this.password);
+                } else {
+                    con = DriverManager.getConnection("jdbc:postgresql:" + dbname, this.user, this.password);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexaoPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return con;
     }
 }

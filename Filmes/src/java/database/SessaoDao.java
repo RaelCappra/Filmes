@@ -29,15 +29,18 @@ public class SessaoDao implements Dao<Sessao, Long> {
     private ConexaoPostgreSQL conexao;
 
     public SessaoDao() {
-        try {
+        /*try {
             if(conexaoDefault.getConnection() == null || conexaoDefault.getConnection().isClosed()){
                 this.conexao = new ConexaoPostgreSQL("localhost", "postgres", "postgres", "cinema");
             } else{
+                conexaoDefault.setDefault();
                 this.conexao = conexaoDefault;
             }
         } catch (SQLException ex) {
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
+        this.conexao = conexaoDefault;
+        this.conexao.setDefault();
     }
 
     @Override
@@ -64,6 +67,7 @@ public class SessaoDao implements Dao<Sessao, Long> {
             //TODO: tratar
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        conexao.fechar();
     }
 
     @Override
@@ -77,6 +81,7 @@ public class SessaoDao implements Dao<Sessao, Long> {
             //TODO: tratar
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        conexao.fechar();
     }
 
     @Override
@@ -111,6 +116,7 @@ public class SessaoDao implements Dao<Sessao, Long> {
             //TODO: tratar
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        conexao.fechar();
         return result;
     }
 
@@ -144,6 +150,7 @@ public class SessaoDao implements Dao<Sessao, Long> {
             //TODO: tratar
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        conexao.fechar();
         return sessao;
     }
 

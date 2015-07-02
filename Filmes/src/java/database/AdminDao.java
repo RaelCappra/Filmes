@@ -22,7 +22,7 @@ import model.Admin;
 public class AdminDao implements Dao<Admin, String>{
     private ConexaoPostgreSQL conexao;
     public AdminDao(){
-        try {
+        /*try {
             if(conexaoDefault.getConnection() == null || conexaoDefault.getConnection().isClosed()){
                 this.conexao = new ConexaoPostgreSQL("localhost", "postgres", "postgres", "cinema");
             } else{
@@ -30,7 +30,9 @@ public class AdminDao implements Dao<Admin, String>{
             }
         } catch (SQLException ex) {
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
+        this.conexao = conexaoDefault;
+        this.conexao.setDefault();
     }
 
     @Override
@@ -45,6 +47,7 @@ public class AdminDao implements Dao<Admin, String>{
             //TODO: tratar
             Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        conexao.fechar();
     }
 
     @Override
@@ -58,6 +61,7 @@ public class AdminDao implements Dao<Admin, String>{
             //TODO: tratar
             Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        conexao.fechar();
     }
 
     @Override
@@ -77,6 +81,7 @@ public class AdminDao implements Dao<Admin, String>{
             //TODO: tratar
             Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        conexao.fechar();
         return result;
     }
 
@@ -97,6 +102,7 @@ public class AdminDao implements Dao<Admin, String>{
             //TODO: tratar
             Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        conexao.fechar();
         return result;
     }
     

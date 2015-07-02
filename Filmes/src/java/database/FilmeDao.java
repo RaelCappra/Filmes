@@ -26,7 +26,7 @@ public class FilmeDao implements Dao<Filme, Long> {
     private ConexaoPostgreSQL conexao;
 
     public FilmeDao() {
-        try {
+        /*try {
             if(conexaoDefault.getConnection() == null || conexaoDefault.getConnection().isClosed()){
                 this.conexao = new ConexaoPostgreSQL("localhost", "postgres", "postgres", "cinema");
             } else{
@@ -34,7 +34,9 @@ public class FilmeDao implements Dao<Filme, Long> {
             }
         } catch (SQLException ex) {
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
+        this.conexao = conexaoDefault;
+        this.conexao.setDefault();
     }
 
     @Override
@@ -57,6 +59,7 @@ public class FilmeDao implements Dao<Filme, Long> {
             //TODO: tratar
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        conexao.fechar();
     }
 
     @Override
@@ -70,6 +73,7 @@ public class FilmeDao implements Dao<Filme, Long> {
             //TODO: tratar
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        conexao.fechar();
     }
 
     @Override
@@ -102,6 +106,7 @@ public class FilmeDao implements Dao<Filme, Long> {
             //TODO: tratar
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        conexao.fechar();
         return result;
     }
 
@@ -134,6 +139,7 @@ public class FilmeDao implements Dao<Filme, Long> {
             //TODO: tratar
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        conexao.fechar();
         return result;
     }
     
@@ -160,6 +166,7 @@ public class FilmeDao implements Dao<Filme, Long> {
             //TODO: tratar
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        conexao.fechar();
         return result;
     }
 }
