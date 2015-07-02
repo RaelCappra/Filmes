@@ -20,7 +20,7 @@ import model.Sessao;
 public class Test {
     public static void main(String... args){
         Filme filme = new Filme();
-        filme.setTitulo("hao123");
+        filme.setTitulo("ultimo");
         filme.setDirecao("biaud");
         filme.setElenco("biaud");
         filme.setLinkTrailer("biaud");
@@ -28,10 +28,10 @@ public class Test {
         filme.setClassificacao(new Classificacao(1, "e"));
         filme.setGenero(new Genero(1, "r"));
         filme.setDuracaoMinutos(61);
-        //FilmeDao filmeDao = new FilmeDao();
-        filme.setId(5);
+        FilmeDao filmeDao = new FilmeDao();
+        filme.setId(filmeDao.saveReturningId(filme));
         SessaoDao sessaoDao = new SessaoDao();
-        for(int i = 0; i < 40; i++){
+        for(int i = 0; i < 1; i++){
             Sessao sessao = new Sessao();
             sessao.setFilme(filme);
             sessao.setHorario(Calendar.getInstance());
