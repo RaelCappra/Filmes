@@ -64,10 +64,12 @@ public class Servlet extends HttpServlet {
                     objectController.after();
                     // redirecionando para a pagina com o mesmo nome do método do controller
                     try {
-                        if (objectController.hasPageJsp()) {
+                        if (objectController.hasPageJsp() && !response.isCommitted()) {
                             String url = Controller.URL_VIEW + request.getParameter("controller") + "/" + request.getParameter("method") + ".jsp";
                             RequestDispatcher rd = request.getRequestDispatcher(url);
                             rd.forward(request, response);
+                        } else{
+                            
                         }
                     } catch (ServletException | IOException e) {
                         System.out.println(e.getMessage());

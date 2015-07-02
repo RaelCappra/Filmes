@@ -5,7 +5,7 @@ import java.io.IOException;
 public class TestController extends Controller {
 
     public void test() {
-        this.redirect(PessoaController.class, "tela_adicionar");
+        this.redirect(AdminController.class, "tela_adicionar");
     }
 
     public void test_ajax() throws IOException {

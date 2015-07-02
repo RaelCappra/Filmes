@@ -112,12 +112,12 @@ public class AdminDao implements Dao<Admin, String>{
         Admin result = null;
         try(PreparedStatement ps = connection.prepareStatement(query)){
             ps.setString(1, login);
-            ps.setString(1, senha);
+            ps.setString(2, senha);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 result = new Admin();
                 result.setLogin(rs.getString("login"));
-                result.setMd5senha(rs.getString("md5_senha"));
+                result.setMd5senha(rs.getString("senha_md5"));
             }
         } catch (SQLException ex) {
             //TODO: tratar

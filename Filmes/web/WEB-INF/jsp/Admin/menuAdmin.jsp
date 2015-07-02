@@ -1,6 +1,6 @@
 <%-- 
-    Document   : admin
-    Created on : 02/07/2015, 01:29:13
+    Document   : menuAdmin
+    Created on : 02/07/2015, 05:39:40
     Author     : Rael
 --%>
 
@@ -8,12 +8,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script>
-            window.location = "Servlet?controller=Admin&method=telaLogin";
-        </script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login Cinema</title>
+        <title>JSP Page</title>
     </head>
     <body>
+        <h1>Hello World!</h1>
     </body>
 </html>

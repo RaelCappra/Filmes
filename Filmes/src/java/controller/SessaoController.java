@@ -12,6 +12,7 @@ import model.Sessao;
 public class SessaoController extends Controller{
     private final SessaoDao sessaoDao = new SessaoDao();
     public void index(){
+        this.hasPageJsp = true;
         List<Sessao> sessoes = sessaoDao.listSessoesFuturas();
         this.request.setAttribute("sessoes", sessoes);
         this.request.setAttribute("sessoesSize", sessoes.size());
@@ -24,5 +25,10 @@ public class SessaoController extends Controller{
             request.setAttribute("inicio", parameterInicio);
             request.setAttribute("fim", parameterFim);
         }
+    }
+    
+    public void testeRedirect(){
+        this.redirect(AdminController.class, "telaLogin");
+        //this.hasPageJsp = false;
     }
 }
