@@ -6,21 +6,30 @@
 package controller;
 
 import database.AdminDao;
+import database.FilmeDao;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import model.Admin;
+import model.Filme;
 
 /**
  *
  * @author Rael
  */
 public class AdminController extends Controller{
+    FilmeDao filmeDao = new FilmeDao();
+    
+    public void listaFilmes(){
+        List<Filme> filmes = filmeDao.listAll();
+        this.request.setAttribute("filmes", filmes);
+    }
+    
     public void telaLogin(){
-        //this.hasPageJsp = true;
-        //HttpSession session = request.getSession();
+        
     }
     
     public void login(){
-        this.hasPageJsp = false;
+        this.hasPageJsp = true;
         HttpSession session = request.getSession();
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
@@ -29,7 +38,7 @@ public class AdminController extends Controller{
         if(admin == null){
             session.invalidate();
             request.setAttribute("mensagem", "login/senha incorretos");
-            this.redirect("telaLogin");
+            this.redirect(AdminController.class, "telaLogin");
         } else{
             session.setAttribute("admin", admin);
             this.redirect("menuAdmin");

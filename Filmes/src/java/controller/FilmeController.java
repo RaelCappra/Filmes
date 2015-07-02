@@ -15,10 +15,7 @@ import model.Filme;
  */
 public class FilmeController extends Controller{
     FilmeDao filmeDao = new FilmeDao();
-    public void listar(){
-        List<Filme> filmes = filmeDao.listAll();
-        
-    }
+    
     
     public void descricao(){
         long id = Long.parseLong(request.getParameter("id"));

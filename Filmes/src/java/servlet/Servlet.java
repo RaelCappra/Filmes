@@ -64,21 +64,21 @@ public class Servlet extends HttpServlet {
                     objectController.after();
                     // redirecionando para a pagina com o mesmo nome do método do controller
                     try {
-                        if (objectController.hasPageJsp() && !response.isCommitted()) {
+                        if (objectController.hasPageJsp()) {
                             String url = Controller.URL_VIEW + request.getParameter("controller") + "/" + request.getParameter("method") + ".jsp";
                             RequestDispatcher rd = request.getRequestDispatcher(url);
                             rd.forward(request, response);
-                        } else{
-                            
                         }
                     } catch (ServletException | IOException e) {
                         System.out.println(e.getMessage());
                         throw new ServletException("Não há a página " + request.getParameter("method") + " dentro do diretório  " + request.getParameter("controller"));
                     }
                 } catch (NoSuchMethodException e) {
+                    System.out.println(e.getMessage());
                     throw new ServletException("Não há o método " + request.getParameter("method") + " solicitado no controller " + request.getParameter("controller"));
                 }
             } catch (InstantiationException | IllegalAccessException e) {
+                System.out.println(e.getMessage());
                 throw new ServletException("Na classe " + classController.getName() + " nao existe o metodo...." + request.getParameter("method"));
             }
         }

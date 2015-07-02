@@ -12,6 +12,7 @@
         <title>Login Cinema</title>
     </head>
     <body>
+        ${mensagem}
         <form method="post" action="Servlet?controller=Admin&method=login">
             <table>
                 <tr>
