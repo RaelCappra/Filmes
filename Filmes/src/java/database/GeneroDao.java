@@ -23,9 +23,12 @@ public class GeneroDao implements Dao<Genero,Long> {
     private ConexaoPostgreSQL conexao;
     public GeneroDao(){
         try {
-            this.conexao = new ConexaoPostgreSQL("localhost", "postgres", "postgres", "cinema");
-        } catch (Exception ex) {
-            //TODO: tratar
+            if(conexaoDefault.getConnection() == null || conexaoDefault.getConnection().isClosed()){
+                this.conexao = new ConexaoPostgreSQL("localhost", "postgres", "postgres", "cinema");
+            } else{
+                this.conexao = conexaoDefault;
+            }
+        } catch (SQLException ex) {
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -23,10 +23,13 @@ public class ClassificacaoDao implements Dao<Classificacao,Long> {
     private ConexaoPostgreSQL conexao;
     public ClassificacaoDao(){
         try {
-            this.conexao = new ConexaoPostgreSQL("localhost", "postgres", "postgres", "cinema");
-        } catch (Exception ex) {
-            //TODO: tratar
-            Logger.getLogger(ClassificacaoDao.class.getName()).log(Level.SEVERE, null, ex);
+            if(conexaoDefault.getConnection() == null || conexaoDefault.getConnection().isClosed()){
+                this.conexao = new ConexaoPostgreSQL("localhost", "postgres", "postgres", "cinema");
+            } else{
+                this.conexao = conexaoDefault;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
