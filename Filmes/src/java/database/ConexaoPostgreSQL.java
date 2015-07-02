@@ -18,16 +18,20 @@ public class ConexaoPostgreSQL extends Conexao {
     }
 
     // Construtores
-    public ConexaoPostgreSQL() throws Exception {
+    public ConexaoPostgreSQL()/* throws Exception */{
         this(ConexaoPostgreSQL.HOST, ConexaoPostgreSQL.USER, ConexaoPostgreSQL.PASSWORD, ConexaoPostgreSQL.DATABASE);
     }
 
-    public ConexaoPostgreSQL(String host, String user, String password, String database) throws Exception {
+    public ConexaoPostgreSQL(String host, String user, String password, String database) /*throws Exception*/ {
         super(host, user, password, database);
-        if ((host != null) && (host.length() > 0)) {
-            con = DriverManager.getConnection("jdbc:postgresql://" + host + ":"+PORT+"/" + database, this.user, this.password);
-        } else {
-            con = DriverManager.getConnection("jdbc:postgresql:" + database, this.user, this.password);
+        try {
+            if ((host != null) && (host.length() > 0)) {
+                con = DriverManager.getConnection("jdbc:postgresql://" + host + ":" + PORT + "/" + database, this.user, this.password);
+            } else {
+                con = DriverManager.getConnection("jdbc:postgresql:" + database, this.user, this.password);
+            }
+        } catch (SQLException sQLException) {
+            System.exit(1);
         }
     }
    

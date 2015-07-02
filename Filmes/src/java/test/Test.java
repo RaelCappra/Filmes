@@ -28,20 +28,22 @@ public class Test {
         filme.setClassificacao(new Classificacao(1, "e"));
         filme.setGenero(new Genero(1, "r"));
         filme.setDuracaoMinutos(61);
-        FilmeDao filmeDao = new FilmeDao();
-        filme.setId(filmeDao.saveReturningId(filme));
-        
-        Sessao sessao = new Sessao();
-        sessao.setFilme(filme);
-        sessao.setHorario(Calendar.getInstance());
-        sessao.setIs3d(false);
-        sessao.setIsLegendado(true);
-        sessao.setSala(8);
-        sessao.setValorAdulto(1500);
-        
+        //FilmeDao filmeDao = new FilmeDao();
+        filme.setId(5);
         SessaoDao sessaoDao = new SessaoDao();
-        sessaoDao.save(sessao);
-        
-        System.out.println(sessaoDao.listAll());
+        for(int i = 0; i < 40; i++){
+            Sessao sessao = new Sessao();
+            sessao.setFilme(filme);
+            sessao.setHorario(Calendar.getInstance());
+            sessao.setIs3d(false);
+            sessao.setIsLegendado(true);
+            sessao.setSala(i);
+            sessao.setValorAdulto(1500);
+
+            
+            sessaoDao.save(sessao);
+
+            //System.out.println(sessaoDao.listAll());
+        }
     }
 }

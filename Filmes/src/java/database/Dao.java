@@ -14,7 +14,10 @@ import java.util.List;
  * @param <PK>
  */
 public interface Dao<T, PK> {
-
+    
+    final static ConexaoPostgreSQL conexaoDefault = new ConexaoPostgreSQL("localhost", "postgres", "postgres", "cinema");
+    
+    
     void save(T entity);
     
     void delete(PK id);
