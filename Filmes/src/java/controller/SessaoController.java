@@ -12,7 +12,7 @@ import model.Sessao;
 public class SessaoController extends Controller{
     private final SessaoDao sessaoDao = new SessaoDao();
     public void index(){
-        List<Sessao> sessoes = sessaoDao.listAll();
+        List<Sessao> sessoes = sessaoDao.listSessoesFuturas();
         this.request.setAttribute("sessoes", sessoes);
         this.request.setAttribute("sessoesSize", sessoes.size());
         String parameterInicio = request.getParameter("inicio");

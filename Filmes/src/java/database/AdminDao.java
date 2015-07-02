@@ -89,14 +89,35 @@ public class AdminDao implements Dao<Admin, String>{
     public Admin getById(String pk) {
         String query = "select * from admin where login = ?";
         Connection connection = conexao.getConnection();
-        Admin result = new Admin();
+        Admin result = null;
         try(PreparedStatement ps = connection.prepareStatement(query)){
             ps.setString(1, pk);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                Admin admin = new Admin();
-                admin.setLogin(rs.getString("login"));
-                admin.setMd5senha(rs.getString("md5_senha"));
+                result = new Admin();
+                result.setLogin(rs.getString("login"));
+                result.setMd5senha(rs.getString("md5_senha"));
+            }
+        } catch (SQLException ex) {
+            //TODO: tratar
+            Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        conexao.fechar();
+        return result;
+    }
+
+    public Admin autentica(String login, String senha) {
+        String query = "select * from admin where login = ? and senha_md5 = md5(?)";
+        Connection connection = conexao.getConnection();
+        Admin result = null;
+        try(PreparedStatement ps = connection.prepareStatement(query)){
+            ps.setString(1, login);
+            ps.setString(1, senha);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                result = new Admin();
+                result.setLogin(rs.getString("login"));
+                result.setMd5senha(rs.getString("md5_senha"));
             }
         } catch (SQLException ex) {
             //TODO: tratar

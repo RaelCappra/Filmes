@@ -119,6 +119,40 @@ public class SessaoDao implements Dao<Sessao, Long> {
         conexao.fechar();
         return result;
     }
+    public List<Sessao> listSessoesFuturas() {
+        String query = "select * from sessao where horario > now()";
+        List<Sessao> result = new ArrayList<>();
+        Connection connection = conexao.getConnection();
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                FilmeDao filmeDao = new FilmeDao();
+                Filme filme = filmeDao.getById(rs.getLong("filme"));
+                
+                Sessao sessao = new Sessao();
+                
+                sessao.setId(rs.getLong("id"));
+                sessao.setFilme(filme);
+                sessao.setValorAdulto(rs.getDouble("valor_adulto"));
+                sessao.setValorEstudante(rs.getDouble("valor_estudante"));
+                sessao.setValorEstudante(rs.getDouble("valor_idoso"));
+                sessao.setSala(rs.getInt("sala"));
+                sessao.setIsLegendado(rs.getBoolean("is_legendado"));
+                sessao.setIs3d(rs.getBoolean("is3d"));
+                
+                Calendar horario = Calendar.getInstance();
+                java.sql.Timestamp ts = rs.getTimestamp("horario");
+                horario.setTimeInMillis(ts.getTime());
+                sessao.setHorario(horario);
+                result.add(sessao);
+            }
+        } catch (SQLException ex) {
+            //TODO: tratar
+            Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        conexao.fechar();
+        return result;
+    }
 
     @Override
     public Sessao getById(Long pk) {
