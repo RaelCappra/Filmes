@@ -176,8 +176,8 @@ public class FilmeDao implements Dao<Filme, Long> {
     
     public void update(Filme filme){
         String query = "update filme set titulo=?, genero=?, classificacao=?,"
-                + " direcao=?, elenco=?, sinopse=?, link_trailer=?, duracao_min=? "
-                + "where id=?";
+                + " direcao=?, elenco=?, sinopse=?, link_trailer=?, duracao_min=?, "
+                + "url_cartaz=? where id=?";
         Connection connection = conexao.getConnection();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, filme.getTitulo());
@@ -188,7 +188,8 @@ public class FilmeDao implements Dao<Filme, Long> {
             ps.setString(6, filme.getSinopse());
             ps.setString(7, filme.getLinkTrailer());
             ps.setInt(8, filme.getDuracaoMinutos());
-            ps.setLong(9, filme.getId());
+            ps.setString(9, filme.getUrlCartaz());
+            ps.setLong(10, filme.getId());
             ps.execute();
             
         } catch (SQLException ex) {

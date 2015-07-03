@@ -118,7 +118,7 @@ public class AdminController extends Controller {
 
             }
 
-            this.redirect("listaFilmes");
+            this.redirect("listaFilmesRedirect");
         }
     }
 
