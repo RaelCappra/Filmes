@@ -10,7 +10,7 @@
     <body>
         <div class="container">
             <a href="Servlet?controller=admin&method=listaFilmes">Voltar</a>
-            <form method="post" action="Servlet?controller=admin&method=adicionar" role="form" id="form">
+            <form method="post" action="Servlet?controller=admin&method=adicionarFilme" role="form" id="form">
                 <div class="form-group"> 
                   <label for="titulo">Título:</label>
                   <input type="text" name="titulo" id="titulo" required><br>

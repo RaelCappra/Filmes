@@ -66,6 +66,8 @@ public class SessaoDao implements Dao<Sessao, Long> {
         } catch (SQLException ex) {
             //TODO: tratar
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
+            throw new DaoException();
         }
         conexao.fechar();
     }

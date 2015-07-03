@@ -95,6 +95,9 @@
                     </td>
                 </tr>
             </c:forEach>
+                <tr>
+                    <td><a href="Servlet?controller=sessao&method=telaAdicionar">Adicionar Sessão</a></td>
+                </tr>
         </table>
         
         </body>

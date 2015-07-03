@@ -1,7 +1,9 @@
 package controller;
 
+import database.FilmeDao;
 import database.SessaoDao;
 import java.util.List;
+import model.Filme;
 import model.Sessao;
 
 /**
@@ -26,6 +28,13 @@ public class SessaoController extends Controller{
         }
     }
     
+    public void telaAdicionar(){
+        if(AdminController.checkIsAdmin(this)){
+            FilmeDao filmeDao = new FilmeDao();
+            List<Filme> filmes = filmeDao.listAll();
+            request.setAttribute("filmes", filmes);
+        }
+    }
     /*public void testeRedirect(){
         this.redirect(AdminController.class, "telaLogin");
         //this.hasPageJsp = false;

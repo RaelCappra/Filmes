@@ -7,6 +7,7 @@ package controller;
 
 import database.AdminDao;
 import database.ClassificacaoDao;
+import database.DaoException;
 import database.FilmeDao;
 import database.GeneroDao;
 import database.SessaoDao;
@@ -15,6 +16,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -38,7 +43,7 @@ import servlet.Servlet;
  * @author Rael
  */
 public class AdminController extends Controller {
-    
+
     private final SessaoDao sessaoDao = new SessaoDao();
     private final FilmeDao filmeDao = new FilmeDao();
 
@@ -130,11 +135,11 @@ public class AdminController extends Controller {
             this.request.setAttribute("filmes", filmes);
         }
     }
-    
-    private boolean checkIsAdmin(){
+
+    private boolean checkIsAdmin() {
         return checkIsAdmin(this);
     }
-    
+
     static boolean checkIsAdmin(Controller controller) {
         HttpSession session = controller.request.getSession();
         if (session.getAttribute("admin") == null) {
@@ -177,8 +182,8 @@ public class AdminController extends Controller {
         checkIsAdmin();
     }
 
-    public void adicionar() {
-        if(checkIsAdmin()){
+    public void adicionarFilme() {
+        if (checkIsAdmin()) {
             GeneroDao generoDao = new GeneroDao();
             ClassificacaoDao classificacaoDao = new ClassificacaoDao();
 
@@ -203,9 +208,9 @@ public class AdminController extends Controller {
             filme.setElenco(elenco);
             filme.setDuracaoMinutos(duracaoMinutos);
             filme.setSinopse(sinopse);
-            try{
+            try {
                 filmeDao.save(filme);
-            } catch(Exception e){
+            } catch (Exception e) {
                 request.setAttribute("mensagem", "Ocorreu um erro");
                 this.redirect(AdminController.class, "menuAdmin");
                 return;
@@ -213,28 +218,72 @@ public class AdminController extends Controller {
             this.redirect("listaFilmes");
         }
     }
-    
-    public void excluirFilme(){
-        if(checkIsAdmin()){
+
+    public void adicionarSessao() throws ParseException {
+        if (checkIsAdmin()) {
+
+            long idFilme = Long.parseLong(request.getParameter("filme"));
+            
+            Filme filme = filmeDao.getById(idFilme);
+            
+            double valorAdulto = Double.parseDouble(request.getParameter("valorAdulto"));
+            double valorEstudante = Double.parseDouble(request.getParameter("valorEstudante"));
+            double valorIdoso = Double.parseDouble(request.getParameter("valorIdoso"));
+            int sala = Integer.parseInt(request.getParameter("sala"));
+            String stringIs3d = request.getParameter("3d");
+            boolean is3d = stringIs3d != null;
+            String stringLegendado = request.getParameter("legendado");
+            boolean legendado = stringLegendado != null;
+            Calendar horaSessao = Calendar.getInstance();
+
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            horaSessao.setTime(
+                    dateFormat.parse
+        (this.request.getParameter("data") + " " + this.request.getParameter("hora")));
+            
+            Sessao sessao = new Sessao();
+            sessao.setHorario(horaSessao);
+            sessao.setIs3d(is3d);
+            sessao.setIsLegendado(legendado);
+            sessao.setSala(sala);
+            sessao.setFilme(filme);
+            sessao.setValorAdulto(valorAdulto);
+            sessao.setValorEstudante(valorEstudante);
+            sessao.setValorIdoso(valorIdoso);
+            
+            
+            try {
+                sessaoDao.save(sessao);
+            } catch (Exception e) {
+                request.setAttribute("mensagem", "Ocorreu um erro");
+                this.redirect(AdminController.class, "menuAdmin");
+                return;
+            }
+            this.redirect("sessoes");
+        }
+    }
+
+    public void excluirFilme() {
+        if (checkIsAdmin()) {
             long id = Long.parseLong(request.getParameter("id"));
             filmeDao.delete(id);
             this.redirect("listaFilmes");
         }
     }
-    public void excluirSessao(){
-        if(checkIsAdmin()){
+
+    public void excluirSessao() {
+        if (checkIsAdmin()) {
             long id = Long.parseLong(request.getParameter("id"));
             sessaoDao.delete(id);
             this.redirect("sessoes");
         }
     }
-    
-    public void sessoes(){
-        if(checkIsAdmin()){
+
+    public void sessoes() {
+        if (checkIsAdmin()) {
             List<Sessao> sessoes = sessaoDao.listAll();
             request.setAttribute("sessoes", sessoes);
         }
     }
-    
-   
+
 }
