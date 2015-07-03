@@ -9,6 +9,7 @@ import database.AdminDao;
 import database.ClassificacaoDao;
 import database.FilmeDao;
 import database.GeneroDao;
+import database.SessaoDao;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -23,6 +24,7 @@ import model.Admin;
 import model.Classificacao;
 import model.Filme;
 import model.Genero;
+import model.Sessao;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUpload;
@@ -209,5 +211,11 @@ public class AdminController extends Controller {
             }
             this.redirect("listaFilmes");
         }
+    }
+    
+    public void sessoes(){
+        SessaoDao sessaoDao = new SessaoDao();
+        List<Sessao> sessoes = sessaoDao.listAll();
+        request.setAttribute("sessoes", sessoes);   
     }
 }
