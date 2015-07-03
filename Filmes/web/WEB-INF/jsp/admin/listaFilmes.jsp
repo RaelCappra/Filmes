@@ -12,6 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Filmes cadastrados</title>
         <link href="css/bootstrap/css/bootstrap.min.css" rel="stylesheet"/> 
+        <link href="css/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet"/> 
     </head>
     <body>
         <a href="Servlet?controller=admin&method=menuAdmin">Voltar</a>

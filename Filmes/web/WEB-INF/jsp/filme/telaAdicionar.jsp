@@ -5,7 +5,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-16">
         <title>JSP Page</title>
-        <link href="css/bootstrap/css/bootstrap.min.css" rel="stylesheet"/> 
+        <link href="${pageContext.request.contextPath}/css/bootstrap/css/bootstrap.min.css" rel="stylesheet"/> 
+        <link href="${pageContext.request.contextPath}/css/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet"/> 
     </head>
     <body>
         <div class="container-fluid">
