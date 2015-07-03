@@ -221,7 +221,7 @@ public class AdminController extends Controller {
                 this.redirect(AdminController.class, "menuAdmin");
                 return;
             }
-            this.redirect("listaFilmes");
+            this.redirect("listaFilmesRedirect");
         }
     }
 
@@ -271,10 +271,10 @@ public class AdminController extends Controller {
         if (checkIsAdmin()) {
             long id = Long.parseLong(request.getParameter("id"));
             filmeDao.delete(id);
-            this.redirect("listaFilmes");
+            this.redirect("listaFilmesRedirect");
         }
     }
-
+    
     public void editarFilme() throws InterruptedException {
         if (checkIsAdmin()) {
             long id = Long.parseLong(request.getParameter("id"));
@@ -305,9 +305,11 @@ public class AdminController extends Controller {
             filme.setSinopse(sinopse);
             filmeDao.update(filme);
             
-            this.redirect("listaFilmes");
-            Thread.sleep(2000);
+            this.redirect("listaFilmesRedirect");
         }
+    }
+    
+    public void listaFilmesRedirect(){
     }
 
     public void excluirSessao() {
