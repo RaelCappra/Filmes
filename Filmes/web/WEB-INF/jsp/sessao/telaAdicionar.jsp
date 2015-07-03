@@ -10,7 +10,7 @@
     </head>
     <body>
         <div class="container-fluid">
-
+            <a href="Servlet?controller=admin&method=sessoes">Voltar</a>
             <form method="post" action="Servlet?controller=admin&method=adicionarSessao" role="form">
                 <div class="form-group"> 
                     Hora inicio:<input type="date" name="data" required><input type="time" name="hora" required> <br>
