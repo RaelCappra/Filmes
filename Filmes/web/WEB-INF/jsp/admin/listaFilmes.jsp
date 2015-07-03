@@ -48,6 +48,9 @@
                 <th>
                     Classificação
                 </th>
+                <th>
+                    Excluir
+                </th>
             </tr>
 
             <c:if test="${inicio == null}">
@@ -98,6 +101,11 @@
                     </td>
                     <td>
                         ${filme.classificacao.descricao}
+                    </td>
+                    <td>
+                        <a href="Servlet?controller=admin&method=excluirFilme&id=${filme.id}">
+                            X
+                        </a>
                     </td>
                 </tr>
             </c:forEach>

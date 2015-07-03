@@ -38,7 +38,8 @@ import servlet.Servlet;
  * @author Rael
  */
 public class AdminController extends Controller {
-
+    
+    private final SessaoDao sessaoDao = new SessaoDao();
     private final FilmeDao filmeDao = new FilmeDao();
 
     public void editarCartaz() throws FileNotFoundException, IOException, Exception {
@@ -213,9 +214,19 @@ public class AdminController extends Controller {
         }
     }
     
+    public void excluirFilme(){
+        if(checkIsAdmin()){
+            long id = Long.parseLong(request.getParameter("id"));
+            filmeDao.delete(id);
+            this.redirect("listaFilmes");
+        }
+    }
+    
     public void sessoes(){
-        SessaoDao sessaoDao = new SessaoDao();
+        
         List<Sessao> sessoes = sessaoDao.listAll();
         request.setAttribute("sessoes", sessoes);   
     }
+    
+   
 }
