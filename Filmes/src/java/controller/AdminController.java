@@ -275,7 +275,7 @@ public class AdminController extends Controller {
         }
     }
 
-    public void editarFilme() {
+    public void editarFilme() throws InterruptedException {
         if (checkIsAdmin()) {
             long id = Long.parseLong(request.getParameter("id"));
             GeneroDao generoDao = new GeneroDao();
@@ -304,7 +304,9 @@ public class AdminController extends Controller {
             filme.setDuracaoMinutos(duracaoMinutos);
             filme.setSinopse(sinopse);
             filmeDao.update(filme);
+            
             this.redirect("listaFilmes");
+            Thread.sleep(2000);
         }
     }
 
