@@ -75,44 +75,62 @@
                         </form>
 
                     </td>
+                <form id="formEditar${filme.id}" name="formEditar${filme.id}" method="post" role="form" action="Servlet?controller=admin&method=editarFilme&id=${filme.id}">
                     <td>
-                        ${filme.titulo}
+                        <input type="text" name="titulo" id="titulo" required value=" ${filme.titulo}">
                     </td>
                     <td>
                     </td>
                     <td>
-                        ${filme.duracaoMinutos} minutos
+                        <input type="number" name="duracao" min="0" id="duracao" value="${filme.duracaoMinutos}" required> minutos
                     </td>
                     <td>
-                        ${filme.direcao}
+                        <input type="text" name="direcao" id="direcao" required value=" ${filme.direcao}">
                     </td>
                     <td>
-                        ${filme.elenco}
+                        <input type="text" name="elenco" id="elenco" required value=" ${filme.elenco}">
                     </td>
                     <td>
-                        ${filme.sinopse}
+                        <input type="text" name="sinopse" id="sinopse" required value=" ${filme.sinopse}">
                     </td>
                     <td>
                         <a href="http://youtube.com/watch?v=${filme.linkTrailer}">
-                            youtube.com/watch?v=${filme.linkTrailer}</a>
+                            http://youtube.com/watch?v=</a>
+                        <input type="text" name="link" id="link" required value=" ${filme.linkTrailer}">
                     </td>
                     <td>
-                        ${filme.genero.nome}
+                        <select name="genero" id="genero">
+                            <c:forEach items="${generos}" var="genero" >
+                                <option value=${genero.id} 
+                                        ${genero.id eq filme.genero.id ? "selected" : ""}>
+                                    ${genero.nome}
+                                </option>
+                            </c:forEach>
+                        </select>
+
                     </td>
                     <td>
-                        ${filme.classificacao.descricao}
+                        <select name="classificacao" id="classificacao">
+                            <c:forEach items="${classificacoes}" var="classificacao">
+                                <option value=${classificacao.id}
+                                        ${classificacao.id eq filme.classificacao.id ? "selected" : ""}>
+                                    ${classificacao.descricao}
+                                </option>
+                            </c:forEach>
+                        </select>
                     </td>
                     <td>
-                        <a href="Servlet?controller=admin&method=excluirFilme&id=${filme.id}">
-                            X
-                        </a>
-                    </td>
-                </tr>
-            </c:forEach>
-                <tr>
-                    <td><a href="Servlet?controller=filme&method=telaAdicionar">Adicionar Filme</a></td>
-                </tr>
-        </table>
-        
-    </body>
+                </form>
+                <a href="Servlet?controller=admin&method=excluirFilme&id=${filme.id}">
+                    X
+                </a>
+            </td>
+        </tr>
+    </c:forEach>
+    <tr>
+        <td><a href="Servlet?controller=filme&method=telaAdicionar">Adicionar Filme</a></td>
+    </tr>
+</table>
+
+</body>
 </html>

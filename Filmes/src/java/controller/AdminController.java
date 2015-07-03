@@ -131,8 +131,14 @@ public class AdminController extends Controller {
 
     public void listaFilmes() {
         if (checkIsAdmin()) {
+            List<Genero> generos = new GeneroDao().listAll();
+            List<Classificacao> classificacoes = new ClassificacaoDao().listAll();
+            
             List<Filme> filmes = filmeDao.listAll();
             this.request.setAttribute("filmes", filmes);
+            this.request.setAttribute("generos", generos);
+            this.request.setAttribute("classificacoes", classificacoes);
+            
         }
     }
 
