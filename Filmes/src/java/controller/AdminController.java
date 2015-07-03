@@ -221,11 +221,19 @@ public class AdminController extends Controller {
             this.redirect("listaFilmes");
         }
     }
+    public void excluirSessao(){
+        if(checkIsAdmin()){
+            long id = Long.parseLong(request.getParameter("id"));
+            sessaoDao.delete(id);
+            this.redirect("sessoes");
+        }
+    }
     
     public void sessoes(){
-        
-        List<Sessao> sessoes = sessaoDao.listAll();
-        request.setAttribute("sessoes", sessoes);   
+        if(checkIsAdmin()){
+            List<Sessao> sessoes = sessaoDao.listAll();
+            request.setAttribute("sessoes", sessoes);
+        }
     }
     
    
