@@ -42,8 +42,8 @@ public class FilmeDao implements Dao<Filme, Long> {
     @Override
     public void save(Filme entity) {
         String query = "insert into filme (titulo, genero, classificacao,"
-                + " direcao, elenco, sinopse, link_trailer, duracao_min, url_cartaz) "
-                + "values (?,?,?,?,?,?,?,?,?)";
+                + " direcao, elenco, sinopse, link_trailer, duracao_min) "
+                + "values (?,?,?,?,?,?,?,?)";
         Connection connection = conexao.getConnection();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, entity.getTitulo());
@@ -54,7 +54,6 @@ public class FilmeDao implements Dao<Filme, Long> {
             ps.setString(6, entity.getSinopse());
             ps.setString(7, entity.getLinkTrailer());
             ps.setInt(8, entity.getDuracaoMinutos());
-            ps.setString(9, entity.getUrlCartaz());
             ps.execute();
         } catch (SQLException ex) {
             //TODO: tratar
@@ -176,8 +175,8 @@ public class FilmeDao implements Dao<Filme, Long> {
     
     public void update(Filme filme){
         String query = "update filme set titulo=?, genero=?, classificacao=?,"
-                + " direcao=?, elenco=?, sinopse=?, link_trailer=?, duracao_min=?, "
-                + "url_cartaz=? where id=?";
+                + " direcao=?, elenco=?, sinopse=?, link_trailer=?, duracao_min=? "
+                + "where id=?";
         Connection connection = conexao.getConnection();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, filme.getTitulo());
@@ -188,8 +187,7 @@ public class FilmeDao implements Dao<Filme, Long> {
             ps.setString(6, filme.getSinopse());
             ps.setString(7, filme.getLinkTrailer());
             ps.setInt(8, filme.getDuracaoMinutos());
-            ps.setString(9, filme.getUrlCartaz());
-            ps.setLong(10, filme.getId());
+            ps.setLong(9, filme.getId());
             ps.execute();
             
         } catch (SQLException ex) {
