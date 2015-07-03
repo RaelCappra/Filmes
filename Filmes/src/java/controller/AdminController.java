@@ -133,12 +133,12 @@ public class AdminController extends Controller {
         if (checkIsAdmin()) {
             List<Genero> generos = new GeneroDao().listAll();
             List<Classificacao> classificacoes = new ClassificacaoDao().listAll();
-            
+
             List<Filme> filmes = filmeDao.listAll();
             this.request.setAttribute("filmes", filmes);
             this.request.setAttribute("generos", generos);
             this.request.setAttribute("classificacoes", classificacoes);
-            
+
         }
     }
 
@@ -229,9 +229,9 @@ public class AdminController extends Controller {
         if (checkIsAdmin()) {
 
             long idFilme = Long.parseLong(request.getParameter("filme"));
-            
+
             Filme filme = filmeDao.getById(idFilme);
-            
+
             double valorAdulto = Double.parseDouble(request.getParameter("valorAdulto"));
             double valorEstudante = Double.parseDouble(request.getParameter("valorEstudante"));
             double valorIdoso = Double.parseDouble(request.getParameter("valorIdoso"));
@@ -244,9 +244,8 @@ public class AdminController extends Controller {
 
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             horaSessao.setTime(
-                    dateFormat.parse
-        (this.request.getParameter("data") + " " + this.request.getParameter("hora")));
-            
+                    dateFormat.parse(this.request.getParameter("data") + " " + this.request.getParameter("hora")));
+
             Sessao sessao = new Sessao();
             sessao.setHorario(horaSessao);
             sessao.setIs3d(is3d);
@@ -256,8 +255,7 @@ public class AdminController extends Controller {
             sessao.setValorAdulto(valorAdulto);
             sessao.setValorEstudante(valorEstudante);
             sessao.setValorIdoso(valorIdoso);
-            
-            
+
             try {
                 sessaoDao.save(sessao);
             } catch (Exception e) {
@@ -273,6 +271,39 @@ public class AdminController extends Controller {
         if (checkIsAdmin()) {
             long id = Long.parseLong(request.getParameter("id"));
             filmeDao.delete(id);
+            this.redirect("listaFilmes");
+        }
+    }
+
+    public void editarFilme() {
+        if (checkIsAdmin()) {
+            long id = Long.parseLong(request.getParameter("id"));
+            GeneroDao generoDao = new GeneroDao();
+            ClassificacaoDao classificacaoDao = new ClassificacaoDao();
+
+            long idGenero = Long.parseLong(request.getParameter("genero"));
+            long idClassificacao = Long.parseLong(request.getParameter("classificacao"));
+            String titulo = request.getParameter("titulo");
+            String linkTrailer = request.getParameter("link");
+            String diretor = request.getParameter("diretor");
+            String sinopse = request.getParameter("sinopse");
+            String elenco = request.getParameter("elenco");
+            int duracaoMinutos = Integer.parseInt(request.getParameter("duracao"));
+
+            Genero genero = generoDao.getById(idGenero);
+            Classificacao classificacao = classificacaoDao.getById(idClassificacao);
+
+            Filme filme = new Filme();
+            filme.setId(id);
+            filme.setGenero(genero);
+            filme.setClassificacao(classificacao);
+            filme.setTitulo(titulo);
+            filme.setLinkTrailer(linkTrailer);
+            filme.setDirecao(diretor);
+            filme.setElenco(elenco);
+            filme.setDuracaoMinutos(duracaoMinutos);
+            filme.setSinopse(sinopse);
+            filmeDao.update(filme);
             this.redirect("listaFilmes");
         }
     }

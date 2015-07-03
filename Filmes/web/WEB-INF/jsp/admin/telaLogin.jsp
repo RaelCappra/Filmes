@@ -18,11 +18,11 @@
                 <tr>
                     <td><label for="login">Login</label></td>
                 <a href="admin.jsp"></a>
-                    <td><input type="text" name="login" id="login" /></td>
+                    <td><input type="text" name="login" id="login" required/></td>
                 </tr>
                 <tr>
                     <td><label for="senha">Senha</label></td>
-                    <td><input type="password" name="senha" /></td>
+                    <td><input type="password" name="senha" required/></td>
                 </tr>
                 <tr>
                     <td><input type="submit" value="Login" /></td>

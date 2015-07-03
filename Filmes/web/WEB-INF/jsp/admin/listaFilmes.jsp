@@ -49,8 +49,12 @@
                     Classificação
                 </th>
                 <th>
+                    Editar
+                </th>
+                <th>
                     Excluir
                 </th>
+                
             </tr>
 
             <c:if test="${inicio == null}">
@@ -85,7 +89,7 @@
                         <input type="number" name="duracao" min="0" id="duracao" value="${filme.duracaoMinutos}" required> minutos
                     </td>
                     <td>
-                        <input type="text" name="direcao" id="direcao" required value=" ${filme.direcao}">
+                        <input type="text" name="diretor" id="diretor" required value=" ${filme.direcao}">
                     </td>
                     <td>
                         <input type="text" name="elenco" id="elenco" required value=" ${filme.elenco}">
@@ -120,11 +124,15 @@
                         </select>
                     </td>
                     <td>
+                        <input type="submit">
+                    </td>
+                    
                 </form>
+                <td>
                 <a href="Servlet?controller=admin&method=excluirFilme&id=${filme.id}">
                     X
                 </a>
-            </td>
+                </td>
         </tr>
     </c:forEach>
     <tr>
