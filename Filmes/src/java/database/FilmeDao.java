@@ -42,8 +42,8 @@ public class FilmeDao implements Dao<Filme, Long> {
     @Override
     public void save(Filme entity) {
         String query = "insert into filme (titulo, genero, classificacao,"
-                + " direcao, elenco, sinopse, link_trailer, duracao_min) "
-                + "values (?,?,?,?,?,?,?,?)";
+                + " direcao, elenco, sinopse, link_trailer, duracao_min, url_cartaz) "
+                + "values (?,?,?,?,?,?,?,?,?)";
         Connection connection = conexao.getConnection();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, entity.getTitulo());
@@ -54,6 +54,7 @@ public class FilmeDao implements Dao<Filme, Long> {
             ps.setString(6, entity.getSinopse());
             ps.setString(7, entity.getLinkTrailer());
             ps.setInt(8, entity.getDuracaoMinutos());
+            ps.setString(9, entity.getUrlCartaz());
             ps.execute();
         } catch (SQLException ex) {
             //TODO: tratar
@@ -100,6 +101,7 @@ public class FilmeDao implements Dao<Filme, Long> {
                 filme.setSinopse(rs.getString("sinopse"));
                 filme.setLinkTrailer(rs.getString("link_trailer"));
                 filme.setDuracaoMinutos(rs.getInt("duracao_min"));
+                filme.setUrlCartaz(rs.getString("url_cartaz"));
                 result.add(filme);
             }
         } catch (SQLException ex) {
@@ -134,6 +136,7 @@ public class FilmeDao implements Dao<Filme, Long> {
                 result.setSinopse(rs.getString("sinopse"));
                 result.setLinkTrailer(rs.getString("link_trailer"));
                 result.setDuracaoMinutos(rs.getInt("duracao_min"));
+                result.setUrlCartaz(rs.getString("url_cartaz"));
             }
         } catch (SQLException ex) {
             //TODO: tratar
@@ -158,6 +161,7 @@ public class FilmeDao implements Dao<Filme, Long> {
             ps.setString(6, filme.getSinopse());
             ps.setString(7, filme.getLinkTrailer());
             ps.setInt(8, filme.getDuracaoMinutos());
+            ps.setString(9, filme.getUrlCartaz());
             ResultSet rs = ps.executeQuery();
             rs.next();
             result = rs.getLong(1);

@@ -11,7 +11,7 @@ package model;
  */
 public class Filme {
     private long id;
-    private String titulo, direcao, elenco, sinopse, linkTrailer;
+    private String titulo, direcao, elenco, sinopse, linkTrailer, urlCartaz;
     private int duracaoMinutos;
     private Genero genero;
     private Classificacao classificacao;
@@ -106,6 +106,14 @@ public class Filme {
     }
 
     public Filme() {
+    }
+
+    public String getUrlCartaz() {
+        return this.urlCartaz;
+    }
+
+    public void setUrlCartaz(String urlCartaz) {
+        this.urlCartaz = urlCartaz;
     }
     
 }

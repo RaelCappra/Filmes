@@ -13,7 +13,7 @@
         <title>Filmes cadastrados</title>
     </head>
     <body>
-        
+
         <table>
             <tr colspan="100">
                 <th>
@@ -62,35 +62,44 @@
                         <a href="Servlet?controller=filme&method=descricao&id=${filme.id}">
                             PLACEHOLDER
                         </a>
+                        <form id="formImagem" name="formImagem" method="post" action="Servlet?controller=admin&method=editarCartaz&id=${filme.id}" enctype="multipart/form-data">
+                            <input type="hidden" id="tipoForm" name="tipoForm" value="imagem">
+                            <%--<input type="hidden" id="controller" name="controller" value="admin">
+                            <input type="hidden" id="method" name="method" value="editarCartaz">
+                            <input type="hidden" id="id" name="id" value="${filme.id}">--%>
+                            <input name="imagem" type="file" accept="image/jpeg; image/gif; image/bmp; image/png" id="imagem" class="dados" maxlength="60" value="c:/">
+                            <input type="submit" id="upload" name="upload">
+                        </form>
+
                     </td>
                     <td>
                         ${filme.titulo}
                     </td>
                     <td>
-                </td>
-                <td>
-                ${filme.duracaoMinutos} minutos
-                </td>
-                <td>
-                ${filme.direcao}
-                </td>
-                <td>
-                ${filme.elenco}
-                </td>
-                <td>
-                ${filme.sinopse}
-                </td>
-                <td>
-                ${filme.linkTrailer}
-                </td>
-                <td>
-                ${filme.genero.nome}
-                </td>
-                <td>
-                ${filme.classificacao.descricao}
-                </td>
+                    </td>
+                    <td>
+                        ${filme.duracaoMinutos} minutos
+                    </td>
+                    <td>
+                        ${filme.direcao}
+                    </td>
+                    <td>
+                        ${filme.elenco}
+                    </td>
+                    <td>
+                        ${filme.sinopse}
+                    </td>
+                    <td>
+                        ${filme.linkTrailer}
+                    </td>
+                    <td>
+                        ${filme.genero.nome}
+                    </td>
+                    <td>
+                        ${filme.classificacao.descricao}
+                    </td>
                 </tr>
             </c:forEach>
         </table>
-</body>
+    </body>
 </html>
