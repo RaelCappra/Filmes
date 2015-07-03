@@ -9,7 +9,7 @@
     </head>
     <body>
         <div class="container">
-            <form method="post" action="Servlet?controller=filme&method=adicionar" role="form" id="form">
+            <form method="post" action="Servlet?controller=admin&method=adicionar" role="form" id="form">
                 <div class="form-group"> 
                   <label for="titulo">Título:</label>
                   <input type="text" name="titulo" id="titulo" required><br>

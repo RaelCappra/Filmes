@@ -6,7 +6,9 @@
 package controller;
 
 import database.AdminDao;
+import database.ClassificacaoDao;
 import database.FilmeDao;
+import database.GeneroDao;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -18,7 +20,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import model.Admin;
+import model.Classificacao;
 import model.Filme;
+import model.Genero;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUpload;
@@ -36,7 +40,7 @@ public class AdminController extends Controller {
     private final FilmeDao filmeDao = new FilmeDao();
 
     public void editarCartaz() throws FileNotFoundException, IOException, Exception {
-        if(checkIsAdmin()){
+        if (checkIsAdmin()) {
             long id = Long.parseLong(request.getParameter("id"));
             Filme filme = filmeDao.getById(id);
             boolean isMultiPart = FileUpload.isMultipartContent(request);
@@ -118,17 +122,21 @@ public class AdminController extends Controller {
     }
 
     public void listaFilmes() {
-        if(checkIsAdmin()){
+        if (checkIsAdmin()) {
             List<Filme> filmes = filmeDao.listAll();
             this.request.setAttribute("filmes", filmes);
         }
     }
-
-    private boolean checkIsAdmin() {
-        HttpSession session = request.getSession();
+    
+    private boolean checkIsAdmin(){
+        return checkIsAdmin(this);
+    }
+    
+    static boolean checkIsAdmin(Controller controller) {
+        HttpSession session = controller.request.getSession();
         if (session.getAttribute("admin") == null) {
             session.invalidate();
-            this.redirect("telaLogin");
+            controller.redirect("telaLogin");
             return false;
         }
         return true;
@@ -164,5 +172,37 @@ public class AdminController extends Controller {
 
     public void menuAdmin() {
         checkIsAdmin();
+    }
+
+    public void adicionar() {
+        if(checkIsAdmin()){
+            GeneroDao generoDao = new GeneroDao();
+            ClassificacaoDao classificacaoDao = new ClassificacaoDao();
+
+            long idGenero = Long.parseLong(request.getParameter("genero"));
+            long idClassificacao = Long.parseLong(request.getParameter("classificacao"));
+            String titulo = request.getParameter("titulo");
+            String linkTrailer = request.getParameter("link");
+            String diretor = request.getParameter("diretor");
+            String sinopse = request.getParameter("sinopse");
+            String elenco = request.getParameter("elenco");
+            int duracaoMinutos = Integer.parseInt(request.getParameter("duracao"));
+
+            Genero genero = generoDao.getById(idGenero);
+            Classificacao classificacao = classificacaoDao.getById(idClassificacao);
+
+            Filme filme = new Filme();
+            filme.setGenero(genero);
+            filme.setClassificacao(classificacao);
+            filme.setTitulo(titulo);
+            filme.setLinkTrailer(linkTrailer);
+            filme.setDirecao(diretor);
+            filme.setElenco(elenco);
+            filme.setDuracaoMinutos(duracaoMinutos);
+            filme.setSinopse(sinopse);
+
+            filmeDao.save(filme);
+            this.redirect(AdminController.class, "listaFilmes");
+        }
     }
 }
