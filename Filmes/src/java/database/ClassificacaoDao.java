@@ -73,7 +73,7 @@ public class ClassificacaoDao implements Dao<Classificacao,Long> {
             while(rs.next()){
                 Classificacao genero = new Classificacao();
                 genero.setId(rs.getLong("id"));
-                genero.setDescricao(rs.getString("nome"));
+                genero.setDescricao(rs.getString("descricao"));
                 result.add(genero);
             }
         } catch (SQLException ex) {

@@ -36,99 +36,102 @@ public class AdminController extends Controller {
     private final FilmeDao filmeDao = new FilmeDao();
 
     public void editarCartaz() throws FileNotFoundException, IOException, Exception {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("admin") == null) {
-            session.invalidate();
-            this.redirect("telaLogin");
-        }
-        long id = Long.parseLong(request.getParameter("id"));
-        Filme filme = filmeDao.getById(id);
-        boolean isMultiPart = FileUpload.isMultipartContent(request);
-        if (isMultiPart) {
+        if(checkIsAdmin()){
+            long id = Long.parseLong(request.getParameter("id"));
+            Filme filme = filmeDao.getById(id);
+            boolean isMultiPart = FileUpload.isMultipartContent(request);
+            if (isMultiPart) {
 
-            FileItemFactory factory = new DiskFileItemFactory();
+                FileItemFactory factory = new DiskFileItemFactory();
 
-            ServletFileUpload upload = new ServletFileUpload(factory);
+                ServletFileUpload upload = new ServletFileUpload(factory);
 
-            String formulario = "";
+                String formulario = "";
 
-            try {
+                try {
 
-                List<FileItem> items = upload.parseRequest(request);
+                    List<FileItem> items = upload.parseRequest(request);
 
-                Iterator<FileItem> iter = items.iterator();
+                    Iterator<FileItem> iter = items.iterator();
 
-                while (iter.hasNext()) {
+                    while (iter.hasNext()) {
 
-                    FileItem item = iter.next();
+                        FileItem item = iter.next();
 
-                    if (item.getFieldName().equals("tipoForm")) {
+                        if (item.getFieldName().equals("tipoForm")) {
 
-                        formulario = item.getString();
+                            formulario = item.getString();
 
-                    }
-                    if (!item.isFormField()) {
+                        }
+                        if (!item.isFormField()) {
 
-                        if (item.getName().length() > 0) {
-                            String caminho = (Servlet.realPath + "/assets/");
-                            File diretorio = new File(caminho);
+                            if (item.getName().length() > 0) {
+                                String caminho = (Servlet.realPath + "/assets/");
+                                File diretorio = new File(caminho);
 
-                            if (!diretorio.exists()) {
-                                diretorio.mkdir();
-                            }
+                                if (!diretorio.exists()) {
+                                    diretorio.mkdir();
+                                }
 
-                            String nome = item.getName();
+                                String nome = item.getName();
 
-                            String arq[] = nome.split("\\\\");
+                                String arq[] = nome.split("\\\\");
 
-                            for (int i = 0; i < arq.length; i++) {
+                                for (int i = 0; i < arq.length; i++) {
 
-                                nome = arq[i];
-
-                            }
-
-                            File file = new File(diretorio, nome);
-                            //item.write(file);
-                            try (FileOutputStream output = new FileOutputStream(file)) {
-                                InputStream is = item.getInputStream();
-                                byte[] buffer = new byte[4096];
-
-                                int nLidos;
-
-                                while ((nLidos = is.read(buffer)) >= 0) {
-
-                                    output.write(buffer, 0, nLidos);
+                                    nome = arq[i];
 
                                 }
 
-                                output.flush();
+                                File file = new File(diretorio, nome);
+                                //item.write(file);
+                                try (FileOutputStream output = new FileOutputStream(file)) {
+                                    InputStream is = item.getInputStream();
+                                    byte[] buffer = new byte[4096];
+
+                                    int nLidos;
+
+                                    while ((nLidos = is.read(buffer)) >= 0) {
+
+                                        output.write(buffer, 0, nLidos);
+
+                                    }
+
+                                    output.flush();
+                                }
+                                filme.setUrlCartaz(nome);
+                                filmeDao.update(filme);
                             }
-                            filme.setUrlCartaz(nome);
-                            filmeDao.update(filme);
+
                         }
 
                     }
 
+                } catch (FileUploadException ex) {
+                    System.out.println(ex.getMessage());
                 }
 
-            } catch (FileUploadException ex) {
-                System.out.println(ex.getMessage());
             }
 
+            this.redirect("listaFilmes");
         }
-
-        this.redirect("listaFilmes");
-
     }
 
     public void listaFilmes() {
+        if(checkIsAdmin()){
+            List<Filme> filmes = filmeDao.listAll();
+            this.request.setAttribute("filmes", filmes);
+        }
+    }
+
+    private boolean checkIsAdmin() {
         HttpSession session = request.getSession();
         if (session.getAttribute("admin") == null) {
             session.invalidate();
             this.redirect("telaLogin");
+            return false;
         }
-        List<Filme> filmes = filmeDao.listAll();
-        this.request.setAttribute("filmes", filmes);
+        return true;
     }
 
     public void telaLogin() {
@@ -160,10 +163,6 @@ public class AdminController extends Controller {
     }
 
     public void menuAdmin() {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("admin") == null) {
-            session.invalidate();
-            this.redirect("telaLogin");
-        }
+        checkIsAdmin();
     }
 }

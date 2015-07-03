@@ -5,9 +5,13 @@
  */
 package controller;
 
+import database.ClassificacaoDao;
 import database.FilmeDao;
+import database.GeneroDao;
 import java.util.List;
+import model.Classificacao;
 import model.Filme;
+import model.Genero;
 
 /**
  *
@@ -21,5 +25,19 @@ public class FilmeController extends Controller{
         long id = Long.parseLong(request.getParameter("id"));
         Filme filme = filmeDao.getById(id);
         request.setAttribute("filme", filme);
+    }
+    
+    public void adicionar(){
+        
+    }
+    public void telaAdicionar(){
+        GeneroDao generoDao = new GeneroDao();
+        ClassificacaoDao classificacaoDao = new ClassificacaoDao();
+        
+        List<Genero> generos = generoDao.listAll();
+        List<Classificacao> classificacoes = classificacaoDao.listAll();
+        
+        request.setAttribute("generos", generos);
+        request.setAttribute("classificacoes", classificacoes);
     }
 }

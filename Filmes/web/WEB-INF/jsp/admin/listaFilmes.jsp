@@ -100,6 +100,9 @@
                     </td>
                 </tr>
             </c:forEach>
+                <tr>
+                    <td><a href="Servlet?controller=filme&method=telaAdicionar">Adicionar Filme</a></td>
+                </tr>
         </table>
         
     </body>

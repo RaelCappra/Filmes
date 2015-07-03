@@ -73,7 +73,7 @@ public class GeneroDao implements Dao<Genero,Long> {
             while(rs.next()){
                 Genero genero = new Genero();
                 genero.setId(rs.getLong("id"));
-                genero.setNome(rs.getString("nome"));
+                genero.setNome(rs.getString("descricao"));
                 result.add(genero);
             }
         } catch (SQLException ex) {
