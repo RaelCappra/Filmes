@@ -56,8 +56,9 @@ public class FilmeDao implements Dao<Filme, Long> {
             ps.setInt(8, entity.getDuracaoMinutos());
             ps.execute();
         } catch (SQLException ex) {
-            //TODO: tratar
+            
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DaoException();
         }
         conexao.fechar();
     }

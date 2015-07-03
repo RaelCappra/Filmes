@@ -12,6 +12,7 @@
         <title>Página do administrador</title>
     </head>
     <body>
+        ${mensagem}
         <a href="Servlet?controller=admin&method=listaFilmes">Filmes</a>
         <a href="Servlet?controller=admin&method=sessoes">Sessões</a>
     </body>

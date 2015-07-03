@@ -90,7 +90,8 @@
                         ${filme.sinopse}
                     </td>
                     <td>
-                        ${filme.linkTrailer}
+                        <a href="http://youtube.com/watch?v=${filme.linkTrailer}">
+                            youtube.com/watch?v=${filme.linkTrailer}</a>
                     </td>
                     <td>
                         ${filme.genero.nome}

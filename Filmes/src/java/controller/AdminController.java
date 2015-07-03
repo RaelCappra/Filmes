@@ -200,9 +200,14 @@ public class AdminController extends Controller {
             filme.setElenco(elenco);
             filme.setDuracaoMinutos(duracaoMinutos);
             filme.setSinopse(sinopse);
-
-            filmeDao.save(filme);
-            this.redirect(AdminController.class, "listaFilmes");
+            try{
+                filmeDao.save(filme);
+            } catch(Exception e){
+                request.setAttribute("mensagem", "Ocorreu um erro");
+                this.redirect(AdminController.class, "menuAdmin");
+                return;
+            }
+            this.redirect("listaFilmes");
         }
     }
 }
