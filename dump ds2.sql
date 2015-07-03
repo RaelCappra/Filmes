@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.3.5
 -- Dumped by pg_dump version 9.3.1
--- Started on 2015-07-03 06:09:35
+-- Started on 2015-07-03 11:31:45
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -281,10 +281,6 @@ SELECT pg_catalog.setval('classificacao_id_seq', 5, true);
 -- Data for Name: filme; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO filme (titulo, genero, classificacao, direcao, elenco, sinopse, link_trailer, id, duracao_min, url_cartaz) VALUES ('mad max', 1, 2, 'superman', 'chimbinha;ekko', 'o mad max vence', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 1, 120, 'sem_cartaz.png');
-INSERT INTO filme (titulo, genero, classificacao, direcao, elenco, sinopse, link_trailer, id, duracao_min, url_cartaz) VALUES ('jurassic world', 1, 2, 'direcao', 'amarante sniper 666', 'dino', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 2, 119, 'sem_cartaz.png');
-INSERT INTO filme (titulo, genero, classificacao, direcao, elenco, sinopse, link_trailer, id, duracao_min, url_cartaz) VALUES ('ultimo', 1, 1, 'biaud', 'biaud', 'biaud', 'biaud', 6, 61, 'sem_cartaz.png');
-INSERT INTO filme (titulo, genero, classificacao, direcao, elenco, sinopse, link_trailer, id, duracao_min, url_cartaz) VALUES ('hao123', 1, 1, 'biaud', 'biaud', 'biaud', 'biaud', 5, 61, 'sem_cartaz.png');
 
 
 --
@@ -293,7 +289,7 @@ INSERT INTO filme (titulo, genero, classificacao, direcao, elenco, sinopse, link
 -- Name: filme_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('filme_id_seq', 6, true);
+SELECT pg_catalog.setval('filme_id_seq', 27, true);
 
 
 --
@@ -328,50 +324,6 @@ SELECT pg_catalog.setval('genero_id_seq', 10, true);
 -- Data for Name: sessao; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (2, 2, '2015-12-01 20:30:00', 39.00, 19.00, 20.00, true, true, 7);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (1, 1, '2015-12-01 18:00:00', 40.00, 20.00, 21.00, true, true, 7);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (9, 5, '2015-07-02 01:12:35.702', 1500, 0, 0, false, true, 8);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (10, 5, '2015-07-02 02:54:57.512', 1500, 0, 0, false, true, 0);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (11, 5, '2015-07-02 02:54:57.715', 1500, 0, 0, false, true, 1);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (12, 5, '2015-07-02 02:54:57.73', 1500, 0, 0, false, true, 2);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (13, 5, '2015-07-02 02:54:57.762', 1500, 0, 0, false, true, 3);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (14, 5, '2015-07-02 02:54:57.793', 1500, 0, 0, false, true, 4);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (15, 5, '2015-07-02 02:54:57.824', 1500, 0, 0, false, true, 5);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (16, 5, '2015-07-02 02:54:57.855', 1500, 0, 0, false, true, 6);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (17, 5, '2015-07-02 02:54:57.871', 1500, 0, 0, false, true, 7);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (18, 5, '2015-07-02 02:54:57.902', 1500, 0, 0, false, true, 8);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (19, 5, '2015-07-02 02:54:57.933', 1500, 0, 0, false, true, 9);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (20, 5, '2015-07-02 02:54:57.964', 1500, 0, 0, false, true, 10);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (21, 5, '2015-07-02 02:54:57.98', 1500, 0, 0, false, true, 11);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (22, 5, '2015-07-02 02:54:58.011', 1500, 0, 0, false, true, 12);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (23, 5, '2015-07-02 02:54:58.042', 1500, 0, 0, false, true, 13);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (24, 5, '2015-07-02 02:54:58.074', 1500, 0, 0, false, true, 14);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (25, 5, '2015-07-02 02:54:58.105', 1500, 0, 0, false, true, 15);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (26, 5, '2015-07-02 02:54:58.136', 1500, 0, 0, false, true, 16);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (27, 5, '2015-07-02 02:54:58.167', 1500, 0, 0, false, true, 17);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (28, 5, '2015-07-02 02:54:58.198', 1500, 0, 0, false, true, 18);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (29, 5, '2015-07-02 02:54:58.23', 1500, 0, 0, false, true, 19);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (30, 5, '2015-07-02 02:54:58.245', 1500, 0, 0, false, true, 20);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (31, 5, '2015-07-02 02:54:58.276', 1500, 0, 0, false, true, 21);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (32, 5, '2015-07-02 02:54:58.308', 1500, 0, 0, false, true, 22);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (33, 5, '2015-07-02 02:54:58.339', 1500, 0, 0, false, true, 23);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (34, 5, '2015-07-02 02:54:58.354', 1500, 0, 0, false, true, 24);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (35, 5, '2015-07-02 02:54:58.386', 1500, 0, 0, false, true, 25);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (36, 5, '2015-07-02 02:54:58.417', 1500, 0, 0, false, true, 26);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (37, 5, '2015-07-02 02:54:58.448', 1500, 0, 0, false, true, 27);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (38, 5, '2015-07-02 02:54:58.464', 1500, 0, 0, false, true, 28);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (39, 5, '2015-07-02 02:54:58.495', 1500, 0, 0, false, true, 29);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (40, 5, '2015-07-02 02:54:58.526', 1500, 0, 0, false, true, 30);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (41, 5, '2015-07-02 02:54:58.557', 1500, 0, 0, false, true, 31);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (42, 5, '2015-07-02 02:54:58.588', 1500, 0, 0, false, true, 32);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (43, 5, '2015-07-02 02:54:58.62', 1500, 0, 0, false, true, 33);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (44, 5, '2015-07-02 02:54:58.635', 1500, 0, 0, false, true, 34);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (45, 5, '2015-07-02 02:54:58.682', 1500, 0, 0, false, true, 35);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (46, 5, '2015-07-02 02:54:58.698', 1500, 0, 0, false, true, 36);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (47, 5, '2015-07-02 02:54:58.729', 1500, 0, 0, false, true, 37);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (48, 5, '2015-07-02 02:54:58.76', 1500, 0, 0, false, true, 38);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (49, 5, '2015-07-02 02:54:58.791', 1500, 0, 0, false, true, 39);
-INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_idoso, is3d, is_legendado, sala) VALUES (50, 6, '2015-07-02 03:56:28.133', 1500, 0, 0, false, true, 0);
 
 
 --
@@ -380,7 +332,7 @@ INSERT INTO sessao (id, filme, horario, valor_adulto, valor_estudante, valor_ido
 -- Name: sessao_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('sessao_id_seq', 50, true);
+SELECT pg_catalog.setval('sessao_id_seq', 132, true);
 
 
 --
@@ -476,7 +428,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2015-07-03 06:09:35
+-- Completed on 2015-07-03 11:31:46
 
 --
 -- PostgreSQL database dump complete
