@@ -136,7 +136,7 @@ public class AdminController extends Controller {
         HttpSession session = controller.request.getSession();
         if (session.getAttribute("admin") == null) {
             session.invalidate();
-            controller.redirect("telaLogin");
+            controller.redirect(AdminController.class, "telaLogin");
             return false;
         }
         return true;
