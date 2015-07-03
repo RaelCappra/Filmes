@@ -323,7 +323,9 @@ public class AdminController extends Controller {
     public void sessoes() {
         if (checkIsAdmin()) {
             List<Sessao> sessoes = sessaoDao.listAll();
+            List<Filme> filmes = filmeDao.listAll();
             request.setAttribute("sessoes", sessoes);
+            request.setAttribute("filmes", filmes);
         }
     }
 
