@@ -13,6 +13,6 @@
     </head>
     <body>
         <a href="Servlet?controller=admin&method=listaFilmes">Filmes</a>
-        <a href="adminSessoes">Sessões</a>
+        <a href="Servlet?controller=admin&method=sessoes">Sessões</a>
     </body>
 </html>

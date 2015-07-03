@@ -33,9 +33,14 @@ import servlet.Servlet;
  */
 public class AdminController extends Controller {
 
-    FilmeDao filmeDao = new FilmeDao();
+    private final FilmeDao filmeDao = new FilmeDao();
 
     public void editarCartaz() throws FileNotFoundException, IOException, Exception {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("admin") == null) {
+            session.invalidate();
+            this.redirect("telaLogin");
+        }
         long id = Long.parseLong(request.getParameter("id"));
         Filme filme = filmeDao.getById(id);
         boolean isMultiPart = FileUpload.isMultipartContent(request);
@@ -87,15 +92,15 @@ public class AdminController extends Controller {
                             try (FileOutputStream output = new FileOutputStream(file)) {
                                 InputStream is = item.getInputStream();
                                 byte[] buffer = new byte[4096];
-                                
+
                                 int nLidos;
-                                
+
                                 while ((nLidos = is.read(buffer)) >= 0) {
-                                    
+
                                     output.write(buffer, 0, nLidos);
-                                    
+
                                 }
-                                
+
                                 output.flush();
                             }
                             filme.setUrlCartaz(nome);
@@ -111,38 +116,54 @@ public class AdminController extends Controller {
             }
 
         }
-        
+
         this.redirect("listaFilmes");
 
     }
 
     public void listaFilmes() {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("admin") == null) {
+            session.invalidate();
+            this.redirect("telaLogin");
+        }
         List<Filme> filmes = filmeDao.listAll();
         this.request.setAttribute("filmes", filmes);
     }
 
     public void telaLogin() {
-
-    }
-
-    public void login() {
-        this.hasPageJsp = true;
         HttpSession session = request.getSession();
-        String login = request.getParameter("login");
-        String senha = request.getParameter("senha");
-        AdminDao adminDao = new AdminDao();
-        Admin admin = adminDao.autentica(login, senha);
-        if (admin == null) {
-            session.invalidate();
-            request.setAttribute("mensagem", "login/senha incorretos");
-
-            this.redirect(AdminController.class, "telaLogin");
-        } else {
-            session.setAttribute("admin", admin);
+        if (session.getAttribute("admin") != null) {
             this.redirect("menuAdmin");
         }
     }
 
+    public void login() {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("admin") != null) {
+            this.redirect("menuAdmin");
+        } else {
+            String login = request.getParameter("login");
+            String senha = request.getParameter("senha");
+            AdminDao adminDao = new AdminDao();
+            Admin admin = adminDao.autentica(login, senha);
+            if (admin == null) {
+                session.invalidate();
+                request.setAttribute("mensagem", "login/senha incorretos");
+
+                this.redirect(AdminController.class, "telaLogin");
+            } else {
+                session.setAttribute("admin", admin);
+                this.redirect("menuAdmin");
+            }
+        }
+    }
+
     public void menuAdmin() {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("admin") == null) {
+            session.invalidate();
+            this.redirect("telaLogin");
+        }
     }
 }

@@ -13,7 +13,7 @@
         <title>Filmes cadastrados</title>
     </head>
     <body>
-
+        <a href="Servlet?controller=admin&method=menuAdmin">Voltar</a>
         <table>
             <tr colspan="100">
                 <th>
@@ -101,5 +101,6 @@
                 </tr>
             </c:forEach>
         </table>
+        
     </body>
 </html>
