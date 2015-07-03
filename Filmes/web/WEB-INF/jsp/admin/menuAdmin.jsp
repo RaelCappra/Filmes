@@ -15,5 +15,6 @@
         ${mensagem}
         <a href="Servlet?controller=admin&method=listaFilmes">Filmes</a>
         <a href="Servlet?controller=admin&method=sessoes">Sessões</a>
+        <a href="Servlet?controller=admin&method=logout">Logout</a>
     </body>
 </html>

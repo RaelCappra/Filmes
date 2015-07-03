@@ -58,7 +58,6 @@ public class AdminController extends Controller {
 
                 ServletFileUpload upload = new ServletFileUpload(factory);
 
-                String formulario = "";
 
                 try {
 
@@ -69,12 +68,6 @@ public class AdminController extends Controller {
                     while (iter.hasNext()) {
 
                         FileItem item = iter.next();
-
-                        if (item.getFieldName().equals("tipoForm")) {
-
-                            formulario = item.getString();
-
-                        }
                         if (!item.isFormField()) {
 
                             if (item.getName().length() > 0) {
@@ -328,5 +321,13 @@ public class AdminController extends Controller {
             request.setAttribute("filmes", filmes);
         }
     }
-
+    
+    
+    public void logout(){
+        if (checkIsAdmin()) {
+            HttpSession session = request.getSession();
+            session.invalidate();
+            redirect("telaLogin");
+        }
+    }
 }

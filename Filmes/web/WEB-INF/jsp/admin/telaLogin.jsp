@@ -10,24 +10,31 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Cinema</title>
+        <link href="css/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     </head>
     <body>
-        ${mensagem}
-        <form method="post" action="Servlet?controller=admin&method=login">
-            <table>
-                <tr>
-                    <td><label for="login">Login</label></td>
-                <a href="admin.jsp"></a>
-                    <td><input type="text" name="login" id="login" required/></td>
-                </tr>
-                <tr>
-                    <td><label for="senha">Senha</label></td>
-                    <td><input type="password" name="senha" required/></td>
-                </tr>
-                <tr>
-                    <td><input type="submit" value="Login" /></td>
-                </tr>
-            </table>
-        </form>
+        <div class="container-fluid">
+            ${mensagem}
+
+
+            <form method="post" action="Servlet?controller=admin&method=login" role="form">
+
+                <div class="form-control">
+                    <label for="login">Login</label>
+                    <input type="text" name="login" id="login" required/>
+                </div>
+
+                <div class="form-control">
+
+
+                    <label for="senha">Senha</label>
+                    <input type="password" name="senha" required/>
+                </div>
+                <div class="form-control">
+                    <input type="submit" value="Login" />
+                </div>
+            </form>
+
+        </div>
     </body>
 </html>

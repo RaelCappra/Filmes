@@ -8,7 +8,7 @@
         <link href="css/bootstrap/css/bootstrap.min.css" rel="stylesheet"/> 
     </head>
     <body>
-        <div class="container">
+        <div class="container-fluid">
             <a href="Servlet?controller=admin&method=listaFilmes">Voltar</a>
             <form method="post" action="Servlet?controller=admin&method=adicionarFilme" role="form" id="form">
                 <div class="form-group"> 

@@ -11,12 +11,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Filmes cadastrados</title>
+        <link href="css/bootstrap/css/bootstrap.min.css" rel="stylesheet"/> 
     </head>
     <body>
         <a href="Servlet?controller=admin&method=menuAdmin">Voltar</a>
-        <table>
+        <table class="table table-bordered">
             <tr colspan="100">
-                <th>
+                <th colspan="100">
                     Filme
                 </th>
             </tr>
@@ -82,8 +83,6 @@
                 <form id="formEditar${filme.id}" name="formEditar${filme.id}" method="post" role="form" action="Servlet?controller=admin&method=editarFilme&id=${filme.id}">
                     <td>
                         <input type="text" name="titulo" id="titulo" required value=" ${filme.titulo}">
-                    </td>
-                    <td>
                     </td>
                     <td>
                         <input type="number" name="duracao" min="0" id="duracao" value="${filme.duracaoMinutos}" required> minutos
