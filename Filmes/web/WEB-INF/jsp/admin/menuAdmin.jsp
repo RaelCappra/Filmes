@@ -10,12 +10,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-16">
         <title>Página do administrador</title>
-        
+        <link href="css/bootstrap/css/bootstrap.min.css" rel="stylesheet"/> 
+        <link href="css/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet"/> 
     </head>
     <body>
-        ${mensagem}
-        <a href="Servlet?controller=admin&method=listaFilmes">Filmes</a>
-        <a href="Servlet?controller=admin&method=sessoes">Sessões</a>
-        <a href="Servlet?controller=admin&method=logout">Logout</a>
+        <div class="container-fluid">
+            <div class="well">
+                ${mensagem}<br>
+                <a href="Servlet?controller=admin&method=listaFilmes">Filmes</a><br>
+                <a href="Servlet?controller=admin&method=sessoes">Sessões</a><br>
+                <a href="Servlet?controller=admin&method=logout">Logout</a>
+             </div>
+        </div>
     </body>
 </html>
