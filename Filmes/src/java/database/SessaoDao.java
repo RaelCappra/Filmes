@@ -190,4 +190,33 @@ public class SessaoDao implements Dao<Sessao, Long> {
         return sessao;
     }
 
+    public void update(Sessao sessao) {
+        String query = "update sessao set filme=?, horario=?, valor_adulto=?,"
+                + " valor_estudante=?, valor_idoso=?, is3d=?, is_legendado=?, sala=? "
+                + "where id=?";
+        Connection connection = conexao.getConnection();
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setLong(1, sessao.getFilme().getId());
+
+            java.sql.Timestamp ts = new java.sql.Timestamp(sessao.getHorario()
+                    .getTimeInMillis());
+
+            ps.setTimestamp(2, ts);
+            ps.setDouble(3, sessao.getValorAdulto());
+            ps.setDouble(4, sessao.getValorEstudante());
+            ps.setDouble(5, sessao.getValorIdoso());
+            ps.setBoolean(6, sessao.isIs3d());
+            ps.setBoolean(7, sessao.isIsLegendado());
+            ps.setInt(8, sessao.getSala());
+            ps.setLong(9, sessao.getId());
+            ps.execute();
+        } catch (SQLException ex) {
+            //TODO: tratar
+            Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
+            throw new DaoException();
+        }
+        conexao.fechar();
+    }
+
 }

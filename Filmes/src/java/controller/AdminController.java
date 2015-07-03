@@ -58,7 +58,6 @@ public class AdminController extends Controller {
 
                 ServletFileUpload upload = new ServletFileUpload(factory);
 
-
                 try {
 
                     List<FileItem> items = upload.parseRequest(request);
@@ -229,9 +228,9 @@ public class AdminController extends Controller {
             double valorEstudante = Double.parseDouble(request.getParameter("valorEstudante").trim());
             double valorIdoso = Double.parseDouble(request.getParameter("valorIdoso").trim());
             int sala = Integer.parseInt(request.getParameter("sala").trim());
-            String stringIs3d = request.getParameter("3d").trim();
+            String stringIs3d = request.getParameter("3d");
             boolean is3d = stringIs3d != null;
-            String stringLegendado = request.getParameter("legendado").trim();
+            String stringLegendado = request.getParameter("legendado");
             boolean legendado = stringLegendado != null;
             Calendar horaSessao = Calendar.getInstance();
 
@@ -267,7 +266,7 @@ public class AdminController extends Controller {
             this.redirect("listaFilmesRedirect");
         }
     }
-    
+
     public void editarFilme() throws InterruptedException {
         if (checkIsAdmin()) {
             long id = Long.parseLong(request.getParameter("id"));
@@ -297,12 +296,12 @@ public class AdminController extends Controller {
             filme.setDuracaoMinutos(duracaoMinutos);
             filme.setSinopse(sinopse);
             filmeDao.update(filme);
-            
+
             this.redirect("listaFilmesRedirect");
         }
     }
-    
-    public void listaFilmesRedirect(){
+
+    public void listaFilmesRedirect() {
     }
 
     public void excluirSessao() {
@@ -321,9 +320,51 @@ public class AdminController extends Controller {
             request.setAttribute("filmes", filmes);
         }
     }
-    
-    
-    public void logout(){
+
+    public void editarSessao() throws ParseException {
+        if (checkIsAdmin()) {
+
+            long idFilme = Long.parseLong(request.getParameter("filme").trim());
+            long idSessao = Long.parseLong(request.getParameter("id"));
+            Filme filme = filmeDao.getById(idFilme);
+
+            double valorAdulto = Double.parseDouble(request.getParameter("valorAdulto").trim());
+            double valorEstudante = Double.parseDouble(request.getParameter("valorEstudante").trim());
+            double valorIdoso = Double.parseDouble(request.getParameter("valorIdoso").trim());
+            int sala = Integer.parseInt(request.getParameter("sala").trim());
+            String stringIs3d = request.getParameter("3d");
+            boolean is3d = stringIs3d != null;
+            String stringLegendado = request.getParameter("legendado");
+            boolean legendado = stringLegendado != null;
+            Calendar horaSessao = Calendar.getInstance();
+
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            horaSessao.setTime(
+                    dateFormat.parse(this.request.getParameter("data").trim() + " " + this.request.getParameter("hora").trim()));
+
+            Sessao sessao = new Sessao();
+            sessao.setId(idSessao);
+            sessao.setHorario(horaSessao);
+            sessao.setIs3d(is3d);
+            sessao.setIsLegendado(legendado);
+            sessao.setSala(sala);
+            sessao.setFilme(filme);
+            sessao.setValorAdulto(valorAdulto);
+            sessao.setValorEstudante(valorEstudante);
+            sessao.setValorIdoso(valorIdoso);
+
+            try {
+                sessaoDao.update(sessao);
+            } catch (Exception e) {
+                request.setAttribute("mensagem", "Ocorreu um erro");
+                this.redirect(AdminController.class, "menuAdmin");
+                return;
+            }
+            this.redirect("sessoes");
+        }
+    }
+
+    public void logout() {
         if (checkIsAdmin()) {
             HttpSession session = request.getSession();
             session.invalidate();
