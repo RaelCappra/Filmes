@@ -79,7 +79,7 @@
                             </td>
                             <td>
                                 <input type="date" name="data" required 
-                                       value="<fmt:formatDate value="${sessao.horario.time}" pattern="dd/MM/yyyy"/>">
+                                       value="<fmt:formatDate value="${sessao.horario.time}" pattern="yyyy-MM-dd"/>">
                                 <br><input type="time" name="hora" required
                                            value="<fmt:formatDate value="${sessao.horario.time}" pattern="HH:mm"/>">
 
