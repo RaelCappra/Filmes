@@ -35,7 +35,8 @@
                     <input type="submit" value="Login" />
                 </div>
             </form>
-
+            <br><br>
+            <a href="Servlet?controller=sessao&method=index">Home</a>
         </div>
     </body>
 </html>
