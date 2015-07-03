@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "Servlet", urlPatterns = {"/Servlet"})
 public class Servlet extends HttpServlet {
-
+    public static String realPath;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -29,7 +29,8 @@ public class Servlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException {
-
+        realPath = getServletContext().getRealPath("/");
+        System.out.println(realPath);
         if ((null == request.getParameter("method") || request.getParameter("controller") == null)) {
             throw new ServletException("A variável controller e/ou method não foi/foram setadas....");
         } else {

@@ -7,8 +7,15 @@ package controller;
 
 import database.AdminDao;
 import database.FilmeDao;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import model.Admin;
 import model.Filme;
@@ -18,6 +25,7 @@ import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import servlet.Servlet;
 
 /**
  *
@@ -27,9 +35,9 @@ public class AdminController extends Controller {
 
     FilmeDao filmeDao = new FilmeDao();
 
-    public void editarCartaz() {
+    public void editarCartaz() throws FileNotFoundException, IOException, Exception {
         long id = Long.parseLong(request.getParameter("id"));
-        System.out.println("chamou de boa");
+        Filme filme = filmeDao.getById(id);
         boolean isMultiPart = FileUpload.isMultipartContent(request);
         if (isMultiPart) {
 
@@ -41,26 +49,57 @@ public class AdminController extends Controller {
 
             try {
 
-                List items = upload.parseRequest(request);
+                List<FileItem> items = upload.parseRequest(request);
 
-                Iterator iter = items.iterator();
+                Iterator<FileItem> iter = items.iterator();
 
                 while (iter.hasNext()) {
 
-                    FileItem item = (FileItem) iter.next();
+                    FileItem item = iter.next();
 
                     if (item.getFieldName().equals("tipoForm")) {
 
                         formulario = item.getString();
 
                     }
-
                     if (!item.isFormField()) {
 
                         if (item.getName().length() > 0) {
-                            
-                            //this.inserirImagem(item);
+                            String caminho = (Servlet.realPath + "/assets/");
+                            File diretorio = new File(caminho);
 
+                            if (!diretorio.exists()) {
+                                diretorio.mkdir();
+                            }
+
+                            String nome = item.getName();
+
+                            String arq[] = nome.split("\\\\");
+
+                            for (int i = 0; i < arq.length; i++) {
+
+                                nome = arq[i];
+
+                            }
+
+                            File file = new File(diretorio, nome);
+                            //item.write(file);
+                            try (FileOutputStream output = new FileOutputStream(file)) {
+                                InputStream is = item.getInputStream();
+                                byte[] buffer = new byte[4096];
+                                
+                                int nLidos;
+                                
+                                while ((nLidos = is.read(buffer)) >= 0) {
+                                    
+                                    output.write(buffer, 0, nLidos);
+                                    
+                                }
+                                
+                                output.flush();
+                            }
+                            filme.setUrlCartaz(nome);
+                            filmeDao.update(filme);
                         }
 
                     }
@@ -72,6 +111,8 @@ public class AdminController extends Controller {
             }
 
         }
+        
+        this.redirect("listaFilmes");
 
     }
 

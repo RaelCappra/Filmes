@@ -148,8 +148,8 @@ public class FilmeDao implements Dao<Filme, Long> {
     
     public Long saveReturningId(Filme filme){
         String query = "insert into filme (titulo, genero, classificacao,"
-                + " direcao, elenco, sinopse, link_trailer, duracao_min) "
-                + "values (?,?,?,?,?,?,?,?) returning id";
+                + " direcao, elenco, sinopse, link_trailer, duracao_min, url_cartaz) "
+                + "values (?,?,?,?,?,?,?,?,?) returning id";
         Connection connection = conexao.getConnection();
         Long result = -1L;
         try (PreparedStatement ps = connection.prepareStatement(query)) {
@@ -172,5 +172,30 @@ public class FilmeDao implements Dao<Filme, Long> {
         }
         conexao.fechar();
         return result;
+    }
+    
+    public void update(Filme filme){
+        String query = "update filme set titulo=?, genero=?, classificacao=?,"
+                + " direcao=?, elenco=?, sinopse=?, link_trailer=?, duracao_min=?, "
+                + "url_cartaz=? where id=?";
+        Connection connection = conexao.getConnection();
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, filme.getTitulo());
+            ps.setLong(2, filme.getGenero().getId());
+            ps.setLong(3, filme.getClassificacao().getId());
+            ps.setString(4, filme.getDirecao());
+            ps.setString(5, filme.getElenco());
+            ps.setString(6, filme.getSinopse());
+            ps.setString(7, filme.getLinkTrailer());
+            ps.setInt(8, filme.getDuracaoMinutos());
+            ps.setString(9, filme.getUrlCartaz());
+            ps.setLong(10, filme.getId());
+            ps.execute();
+            
+        } catch (SQLException ex) {
+            //TODO: tratar
+            Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        conexao.fechar();
     }
 }

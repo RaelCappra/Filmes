@@ -3,19 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/aluno/Área%20de%20Trabalho/Filmes/Filmes/src/java/controller/SessaoController.java</file>
-            <file>file:/home/aluno/Área%20de%20Trabalho/Filmes/Filmes/src/java/controller/FilmeController.java</file>
-            <file>file:/home/aluno/Área%20de%20Trabalho/Filmes/Filmes/src/java/test/Test.java</file>
-            <file>file:/home/aluno/Área%20de%20Trabalho/Filmes/Filmes/web/WEB-INF/jsp/admin/menuAdmin.jsp</file>
-            <file>file:/home/aluno/Área%20de%20Trabalho/Filmes/Filmes/web/WEB-INF/jsp/admin/listaFilmes.jsp</file>
-            <file>file:/home/aluno/Área%20de%20Trabalho/Filmes/Filmes/web/WEB-INF/jsp/sessao/index.jsp</file>
-            <file>file:/home/aluno/Área%20de%20Trabalho/Filmes/Filmes/web/WEB-INF/jsp/admin/telaLogin.jsp</file>
-            <file>file:/home/aluno/Área%20de%20Trabalho/Filmes/Filmes/web/WEB-INF/jsp/filme/descricao.jsp</file>
-            <file>file:/home/aluno/Área%20de%20Trabalho/Filmes/Filmes/src/java/controller/TestController.java</file>
-            <file>file:/home/aluno/Área%20de%20Trabalho/Filmes/Filmes/web/index.jsp</file>
-            <file>file:/home/aluno/Área%20de%20Trabalho/Filmes/Filmes/src/java/controller/AdminController.java</file>
-            <file>file:/home/aluno/Área%20de%20Trabalho/Filmes/Filmes/src/java/model/Filme.java</file>
-            <file>file:/home/aluno/Área%20de%20Trabalho/Filmes/Filmes/src/java/controller/Controller.java</file>
+            <file>file:/C:/Users/Rael/Documents/IFRS/DS2/Repos/Filmes/Filmes/src/java/model/Filme.java</file>
+            <file>file:/C:/Users/Rael/Documents/IFRS/DS2/Repos/Filmes/Filmes/web/WEB-INF/jsp/sessao/index.jsp</file>
+            <file>file:/C:/Users/Rael/Documents/IFRS/DS2/Repos/Filmes/Filmes/src/java/controller/AdminController.java</file>
+            <file>file:/C:/Users/Rael/Documents/IFRS/DS2/Repos/Filmes/Filmes/src/java/database/FilmeDao.java</file>
+            <file>file:/C:/Users/Rael/Documents/IFRS/DS2/Repos/Filmes/Filmes/web/WEB-INF/jsp/admin/listaFilmes.jsp</file>
+            <file>file:/C:/Users/Rael/Documents/IFRS/DS2/Repos/Filmes/Filmes/web/admin.jsp</file>
+            <file>file:/C:/Users/Rael/Documents/IFRS/DS2/Repos/Filmes/Filmes/web/index.jsp</file>
+            <file>file:/C:/Users/Rael/Documents/IFRS/DS2/Repos/Filmes/Filmes/web/WEB-INF/jsp/admin/telaLogin.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -60,9 +60,9 @@
                 <tr>
                     <td>
                         <a href="Servlet?controller=filme&method=descricao&id=${filme.id}">
-                            <img src="assets/${filme.urlCartaz}">
+                            <img src="assets/${filme.urlCartaz}" width="170" height="240">
                         </a>
-                        <form id="formImagem" name="formImagem" method="post" action="Servlet?controller=admin&method=editarCartaz&id=${filme.id}" enctype="multipart/form-data">
+                        <form id="formImagem${filme.id}" name="formImagem${filme.id}" method="post" action="Servlet?controller=admin&method=editarCartaz&id=${filme.id}" enctype="multipart/form-data">
                             <input type="hidden" id="tipoForm" name="tipoForm" value="imagem">
                             <%--<input type="hidden" id="controller" name="controller" value="admin">
                             <input type="hidden" id="method" name="method" value="editarCartaz">
