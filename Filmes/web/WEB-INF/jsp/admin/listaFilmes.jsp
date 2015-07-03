@@ -60,7 +60,7 @@
                 <tr>
                     <td>
                         <a href="Servlet?controller=filme&method=descricao&id=${filme.id}">
-                            PLACEHOLDER
+                            <img src="assets/${filme.urlCartaz}">
                         </a>
                         <form id="formImagem" name="formImagem" method="post" action="Servlet?controller=admin&method=editarCartaz&id=${filme.id}" enctype="multipart/form-data">
                             <input type="hidden" id="tipoForm" name="tipoForm" value="imagem">
