@@ -28,7 +28,7 @@
                 </div>
                 <div class="form-group"> 
                   <label for="link">Link do trailer (após /watch?v=):</label>
-                  <input type="text" name="trailer" id="link" required><br>
+                  <input type="text" name="link" id="link" required><br>
                 </div>
                 <div class="form-group"> 
                   <label for="classificacao">Classificação etária:</label>

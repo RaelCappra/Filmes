@@ -161,8 +161,8 @@ public class AdminController extends Controller {
         if (session.getAttribute("admin") != null) {
             this.redirect("menuAdmin");
         } else {
-            String login = request.getParameter("login");
-            String senha = request.getParameter("senha");
+            String login = request.getParameter("login").trim();
+            String senha = request.getParameter("senha").trim();
             AdminDao adminDao = new AdminDao();
             Admin admin = adminDao.autentica(login, senha);
             if (admin == null) {
@@ -186,14 +186,14 @@ public class AdminController extends Controller {
             GeneroDao generoDao = new GeneroDao();
             ClassificacaoDao classificacaoDao = new ClassificacaoDao();
 
-            long idGenero = Long.parseLong(request.getParameter("genero"));
-            long idClassificacao = Long.parseLong(request.getParameter("classificacao"));
-            String titulo = request.getParameter("titulo");
-            String linkTrailer = request.getParameter("link");
-            String diretor = request.getParameter("diretor");
-            String sinopse = request.getParameter("sinopse");
-            String elenco = request.getParameter("elenco");
-            int duracaoMinutos = Integer.parseInt(request.getParameter("duracao"));
+            long idGenero = Long.parseLong(request.getParameter("genero").trim());
+            long idClassificacao = Long.parseLong(request.getParameter("classificacao").trim());
+            String titulo = request.getParameter("titulo").trim();
+            String linkTrailer = request.getParameter("link").trim();
+            String diretor = request.getParameter("diretor").trim();
+            String sinopse = request.getParameter("sinopse").trim();
+            String elenco = request.getParameter("elenco").trim();
+            int duracaoMinutos = Integer.parseInt(request.getParameter("duracao").trim());
 
             Genero genero = generoDao.getById(idGenero);
             Classificacao classificacao = classificacaoDao.getById(idClassificacao);
@@ -221,23 +221,23 @@ public class AdminController extends Controller {
     public void adicionarSessao() throws ParseException {
         if (checkIsAdmin()) {
 
-            long idFilme = Long.parseLong(request.getParameter("filme"));
+            long idFilme = Long.parseLong(request.getParameter("filme").trim());
 
             Filme filme = filmeDao.getById(idFilme);
 
-            double valorAdulto = Double.parseDouble(request.getParameter("valorAdulto"));
-            double valorEstudante = Double.parseDouble(request.getParameter("valorEstudante"));
-            double valorIdoso = Double.parseDouble(request.getParameter("valorIdoso"));
-            int sala = Integer.parseInt(request.getParameter("sala"));
-            String stringIs3d = request.getParameter("3d");
+            double valorAdulto = Double.parseDouble(request.getParameter("valorAdulto").trim());
+            double valorEstudante = Double.parseDouble(request.getParameter("valorEstudante").trim());
+            double valorIdoso = Double.parseDouble(request.getParameter("valorIdoso").trim());
+            int sala = Integer.parseInt(request.getParameter("sala").trim());
+            String stringIs3d = request.getParameter("3d").trim();
             boolean is3d = stringIs3d != null;
-            String stringLegendado = request.getParameter("legendado");
+            String stringLegendado = request.getParameter("legendado").trim();
             boolean legendado = stringLegendado != null;
             Calendar horaSessao = Calendar.getInstance();
 
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             horaSessao.setTime(
-                    dateFormat.parse(this.request.getParameter("data") + " " + this.request.getParameter("hora")));
+                    dateFormat.parse(this.request.getParameter("data").trim() + " " + this.request.getParameter("hora").trim()));
 
             Sessao sessao = new Sessao();
             sessao.setHorario(horaSessao);
@@ -274,14 +274,14 @@ public class AdminController extends Controller {
             GeneroDao generoDao = new GeneroDao();
             ClassificacaoDao classificacaoDao = new ClassificacaoDao();
 
-            long idGenero = Long.parseLong(request.getParameter("genero"));
-            long idClassificacao = Long.parseLong(request.getParameter("classificacao"));
-            String titulo = request.getParameter("titulo");
-            String linkTrailer = request.getParameter("link");
-            String diretor = request.getParameter("diretor");
-            String sinopse = request.getParameter("sinopse");
-            String elenco = request.getParameter("elenco");
-            int duracaoMinutos = Integer.parseInt(request.getParameter("duracao"));
+            long idGenero = Long.parseLong(request.getParameter("genero").trim());
+            long idClassificacao = Long.parseLong(request.getParameter("classificacao").trim());
+            String titulo = request.getParameter("titulo").trim();
+            String linkTrailer = request.getParameter("link").trim();
+            String diretor = request.getParameter("diretor").trim();
+            String sinopse = request.getParameter("sinopse").trim();
+            String elenco = request.getParameter("elenco").trim();
+            int duracaoMinutos = Integer.parseInt(request.getParameter("duracao").trim());
 
             Genero genero = generoDao.getById(idGenero);
             Classificacao classificacao = classificacaoDao.getById(idClassificacao);
