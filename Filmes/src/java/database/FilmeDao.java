@@ -27,14 +27,14 @@ public class FilmeDao implements Dao<Filme, Long> {
 
     public FilmeDao() {
         /*try {
-            if(conexaoDefault.getConnection() == null || conexaoDefault.getConnection().isClosed()){
-                this.conexao = new ConexaoPostgreSQL("localhost", "postgres", "postgres", "cinema");
-            } else{
-                this.conexao = conexaoDefault;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+         if(conexaoDefault.getConnection() == null || conexaoDefault.getConnection().isClosed()){
+         this.conexao = new ConexaoPostgreSQL("localhost", "postgres", "postgres", "cinema");
+         } else{
+         this.conexao = conexaoDefault;
+         }
+         } catch (SQLException ex) {
+         Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
+         }*/
         this.conexao = conexaoDefault;
         this.conexao.setDefault();
     }
@@ -56,7 +56,7 @@ public class FilmeDao implements Dao<Filme, Long> {
             ps.setInt(8, entity.getDuracaoMinutos());
             ps.execute();
         } catch (SQLException ex) {
-            
+
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
             throw new DaoException();
         }
@@ -145,8 +145,8 @@ public class FilmeDao implements Dao<Filme, Long> {
         conexao.fechar();
         return result;
     }
-    
-    public Long saveReturningId(Filme filme){
+
+    public Long saveReturningId(Filme filme) {
         String query = "insert into filme (titulo, genero, classificacao,"
                 + " direcao, elenco, sinopse, link_trailer, duracao_min, url_cartaz) "
                 + "values (?,?,?,?,?,?,?,?,?) returning id";
@@ -165,7 +165,7 @@ public class FilmeDao implements Dao<Filme, Long> {
             ResultSet rs = ps.executeQuery();
             rs.next();
             result = rs.getLong(1);
-            
+
         } catch (SQLException ex) {
             //TODO: tratar
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -173,12 +173,17 @@ public class FilmeDao implements Dao<Filme, Long> {
         conexao.fechar();
         return result;
     }
-    
-    public void update(Filme filme){
+
+    public void update(Filme filme) {
         String query = "update filme set titulo=?, genero=?, classificacao=?,"
-                + " direcao=?, elenco=?, sinopse=?, link_trailer=?, duracao_min=?, "
-                + "url_cartaz=? where id=?";
+                + " direcao=?, elenco=?, sinopse=?, link_trailer=?, duracao_min=? ";
+        //+ "url_cartaz=? where id=?";
         Connection connection = conexao.getConnection();
+        if (filme.getUrlCartaz() == null || filme.getUrlCartaz().equals("")) {
+            query += "where id=?";
+        } else {
+            query += ", url_cartaz=? where id=?";
+        }
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, filme.getTitulo());
             ps.setLong(2, filme.getGenero().getId());
@@ -188,10 +193,15 @@ public class FilmeDao implements Dao<Filme, Long> {
             ps.setString(6, filme.getSinopse());
             ps.setString(7, filme.getLinkTrailer());
             ps.setInt(8, filme.getDuracaoMinutos());
-            ps.setString(9, filme.getUrlCartaz());
-            ps.setLong(10, filme.getId());
+            if (filme.getUrlCartaz() == null || filme.getUrlCartaz().equals("")) {
+                ps.setLong(9, filme.getId());
+            } else {
+                ps.setString(9, filme.getUrlCartaz());
+                ps.setLong(10, filme.getId());
+            }
+
             ps.execute();
-            
+
         } catch (SQLException ex) {
             //TODO: tratar
             Logger.getLogger(GeneroDao.class.getName()).log(Level.SEVERE, null, ex);
