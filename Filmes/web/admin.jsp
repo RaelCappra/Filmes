@@ -9,7 +9,7 @@
 <html>
     <head>
         <script>
-            window.location = "Servlet?controller=Admin&method=telaLogin";
+            window.location = "Servlet?controller=admin&method=telaLogin";
         </script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Cinema</title>

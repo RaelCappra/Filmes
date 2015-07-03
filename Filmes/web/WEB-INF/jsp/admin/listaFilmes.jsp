@@ -59,7 +59,7 @@
             <c:forEach var="filme" items="${filmes}">
                 <tr>
                     <td>
-                        <a href="Servlet?controller=Filme&method=descricao&id=${sessao.filme.id}">
+                        <a href="Servlet?controller=filme&method=descricao&id=${filme.id}">
                             PLACEHOLDER
                         </a>
                     </td>

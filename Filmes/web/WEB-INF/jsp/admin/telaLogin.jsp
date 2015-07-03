@@ -13,7 +13,7 @@
     </head>
     <body>
         ${mensagem}
-        <form method="post" action="Servlet?controller=Admin&method=login">
+        <form method="post" action="Servlet?controller=admin&method=login">
             <table>
                 <tr>
                     <td><label for="login">Login</label></td>
